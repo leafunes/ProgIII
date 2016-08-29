@@ -28,9 +28,11 @@ public class MainRoom extends GameRoom {
 	}
 	
 	public void rigthKey(){
+		int iNull = 0;
+		int jNull = 0;
+		
 		for(int i = 0; i < this.gridDimension; i++){
-			for(int j = 0; j < this.gridDimension; j++){
-				
+			for(int j = this.gridDimension - 2; j >= 0; j--){
 			}
 		}
 		
