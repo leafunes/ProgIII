@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="/home/leandro/Escritorio/Programacion/eclipse/plugins/org.eclipse.ui.workbench_3.107.1.v20160120-2131.jar" sourcepath="/home/leandro/Escritorio/Programacion/eclipse/plugins/org.eclipse.ui.workbench_3.107.1.v20160120-2131.jar"/>
 	<classpathentry kind="lib" path="/home/leandro/Escritorio/Programacion/eclipse/plugins/com.ibm.icu_54.1.1.v201501272100.jar" sourcepath="/home/leandro/Escritorio/Programacion/eclipse/plugins/com.ibm.icu_54.1.1.v201501272100.jar"/>
 	<classpathentry kind="lib" path="/home/leandro/Escritorio/Programacion/eclipse/plugins/org.eclipse.ui.forms_3.6.200.v20150506-2029.jar" sourcepath="/home/leandro/Escritorio/Programacion/eclipse/plugins/org.eclipse.ui.forms_3.6.200.v20150506-2029.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
