@@ -2,7 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 
-public class GameRoom {
+public abstract class GameRoom {
 	
 	private ArrayList<GameObject> objects;
 	private ArrayList<Drawable> drawables;
@@ -26,10 +26,15 @@ public class GameRoom {
 		for (GameObject obj:this.objects){
 			obj.step();
 		}
+		this.behavior();
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
 		return this.drawables;
 	}
+	
+	public abstract void behavior();
+	
+	public abstract void init();
 
 }

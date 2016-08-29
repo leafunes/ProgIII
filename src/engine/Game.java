@@ -28,6 +28,10 @@ public class Game {
 		
 		this.currentRoom = this.rooms.get(this.currentRoomPtr);
 	}
+	
+	public ArrayList<Drawable> getDrawables(){
+		return this.currentRoom.getDrawables();
+	}
 
 	
 	public void step(){
