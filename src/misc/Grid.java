@@ -43,6 +43,7 @@ public class Grid<T> {
 		this.checkBounds(i, j);
 		
 		this.matrix.get(i).set(j, obj);
+		
 	}
 	
 	public void remove(int i, int j){
@@ -61,9 +62,17 @@ public class Grid<T> {
 		return this.matrix;
 	}
 	
-	/*public ArrayList<ArrayList <T> > getColumns(){
-		ArrayList< ArrayList<T> > ret = new ArrayList< ArrayList<T> >();
-	}*/ 
+	public ArrayList<ArrayList <T> > getRowsReverse(){
+		return this.matrixReverse;
+	}
+	
+	public ArrayList<ArrayList <T> > getColumns(){
+		return this.matrixTransp;
+	}
+	
+	public ArrayList<ArrayList <T> > getColumnsReverse(){
+		return this.matrixTranspReverse;
+	}
 	
 	public void checkBounds(int i, int j){
 		if(i < 0 || j < 0 || i >= this.rows || j >= this.cols)
