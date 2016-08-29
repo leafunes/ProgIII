@@ -31,12 +31,20 @@ public abstract class GameObject {
 		
 	}
 	
-	public Drawable draw(){
-		
+	public Drawable getDrawable(){
+		return this.drawable;
 		
 	}
 	
-	public abstract void step();
+	public void step(){
+		
+		this.drawable.actualize(this.posX, this.posY);
+		
+		this.behavior();
+		
+	}
+	
+	public abstract void behavior();
 	
 	
 
