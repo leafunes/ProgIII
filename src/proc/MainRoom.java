@@ -3,6 +3,7 @@ package proc;
 import java.util.Random;
 
 import engine.GameRoom;
+import engine.Key;
 
 public class MainRoom extends GameRoom {
 	
@@ -26,6 +27,15 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
+	public void rigthKey(){
+		for(int i = 0; i < this.gridDimension; i++){
+			for(int j = 0; j < this.gridDimension; j++){
+				
+			}
+		}
+		
+	}
+	
 	@Override
 	public void init(){
 		
@@ -38,13 +48,13 @@ public class MainRoom extends GameRoom {
 	}
 
 	@Override
-	public void eventKeyPress() {
+	public void eventKeyPress(Key k) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void eventClick() {
+	public void eventClick(int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}

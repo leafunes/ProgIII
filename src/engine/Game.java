@@ -38,5 +38,9 @@ public class Game {
 		this.currentRoom.step();
 		
 	}
+	
+	public void eventKeyPress(Key k){
+		this.currentRoom.eventKeyPress(k);
+	}
 
 }
