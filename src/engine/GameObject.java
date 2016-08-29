@@ -9,7 +9,7 @@ public abstract class GameObject {
 	private int yDest;
 	private int velocity;
 	
-	public boolean isMoving;
+	private boolean isMoving;
 	
 	private int width;
 	private int height;
@@ -106,6 +106,10 @@ public abstract class GameObject {
 				this.posY = this.yDest;
 		}
 		
+	}
+	
+	public boolean isMoving(){
+		return this.isMoving;
 	}
 	
 	public abstract void behavior();

@@ -27,7 +27,7 @@ public class GameObjectTest {
 		for (int i = 0; i < 100; i++)
 			obj.step();
 		
-		assertFalse(obj.isMoving);
+		assertFalse(obj.isMoving());
 		draw = obj.getDrawable();	
 		assertEquals(50, draw.x);
 		assertEquals(50, draw.y);
@@ -37,7 +37,7 @@ public class GameObjectTest {
 		for (int i = 0; i < 100; i++)
 			obj.step();
 		
-		assertFalse(obj.isMoving);
+		assertFalse(obj.isMoving());
 		draw = obj.getDrawable();	
 		assertEquals(50, draw.x);
 		assertEquals(100, draw.y);
@@ -47,7 +47,7 @@ public class GameObjectTest {
 		for (int i = 0; i < 100; i++)
 			obj.step();
 		
-		assertFalse(obj.isMoving);
+		assertFalse(obj.isMoving());
 		draw = obj.getDrawable();	
 		assertEquals(0, draw.x);
 		assertEquals(100, draw.y);
