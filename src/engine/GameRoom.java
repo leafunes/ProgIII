@@ -35,6 +35,10 @@ public abstract class GameRoom {
 	
 	public abstract void behavior();
 	
+	public abstract void eventKeyPress();
+	
+	public abstract void eventClick();
+	
 	public abstract void init();
 
 }
