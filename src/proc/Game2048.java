@@ -12,4 +12,10 @@ public class Game2048 extends Game {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void behavior() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

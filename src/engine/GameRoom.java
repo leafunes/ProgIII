@@ -37,6 +37,8 @@ public abstract class GameRoom {
 	
 	public abstract void eventKeyPress(Key k);
 	
+	public abstract boolean isGameOver();
+	
 	public abstract void eventClick(int x, int y);
 	
 	public abstract void init();

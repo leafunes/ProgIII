@@ -2,10 +2,11 @@ package engine;
 
 import java.util.ArrayList;
 
-public class Game {
+public abstract class Game {
 	
 	private ArrayList<GameRoom> rooms;
 	private int currentRoomPtr;
+	public boolean isGameOver;
 	private GameRoom currentRoom;
 	
 	public Game(GameRoom mainRoom){
@@ -35,12 +36,17 @@ public class Game {
 
 	
 	public void step(){
+		this.isGameOver = this.currentRoom.isGameOver();
+		this.behavior();
 		this.currentRoom.step();
 		
 	}
 	
+	public abstract void behavior();
+	
 	public void eventKeyPress(Key k){
 		this.currentRoom.eventKeyPress(k);
 	}
+	
 
 }

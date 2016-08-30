@@ -2,6 +2,8 @@ package proc;
 
 import java.util.Random;
 
+import org.eclipse.jface.text.WhitespaceCharacterPainter;
+
 import engine.GameRoom;
 import engine.Key;
 
@@ -9,6 +11,9 @@ public class MainRoom extends GameRoom {
 	
 	private Random gen;
 	private Cell[][] grid;
+	
+	private boolean sometingMoved;
+	private int freePlaces;
 	
 	private final int GRID_DIMENSION;
 	private final int GRID_X_OFFSET;
@@ -23,6 +28,8 @@ public class MainRoom extends GameRoom {
 		this.GRID_X_OFFSET = xOffset;
 		this.GRID_Y_OFFSET = yOffset;
 		
+		this.freePlaces = gridDimesion*gridDimesion;
+		
 		this.grid = new Cell[gridDimesion][gridDimesion];
 		
 		this.gen = gen;
@@ -36,7 +43,7 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
-	public void rigthKey(){
+	private void rigthKey(){
 		
 		for(int i = 0; i < this.GRID_DIMENSION; i++){
 			
@@ -44,6 +51,8 @@ public class MainRoom extends GameRoom {
 			
 			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
 				if(this.grid [i][j] == null){
+					this.sometingMoved = true;
+					
 					this.grid[i][j] = this.grid[i][j-1];
 					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
 					this.grid[i][j-1] = null;
@@ -53,7 +62,7 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
-	public void leftKey(){
+	private void leftKey(){
 		
 	}
 	
@@ -64,19 +73,67 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void behavior() {
-		// TODO Auto-generated method stub
+		if(this.sometingMoved){
+			this.sometingMoved = false;
+			
+			while(true){
+				int randI = this.gen.nextInt(this.GRID_DIMENSION);
+				int randJ = this.gen.nextInt(this.GRID_DIMENSION);
+				
+				if(this.grid[randI][randJ] == null){
+					int cellValue = (this.gen.nextInt(1) + 1) * 2;
+					this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue);
+					this.freePlaces --;
+					break;
+				}
+			}
+		}
 		
 	}
 
 	@Override
 	public void eventKeyPress(Key k) {
-		// TODO Auto-generated method stub
+		switch(k){
+			case K_RIGHT:
+				this.rigthKey();
+				break;
+				
+			default:
+				break;
+		}
 		
 	}
 
 	@Override
 	public void eventClick(int x, int y) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isGameOver() {
+		if(this.freePlaces > 0)
+			return false;
+		else{
+			
+			for(int i = 0; i < this.GRID_DIMENSION; i++){
+				
+				for(int j = 0; j < this.GRID_DIMENSION; j++){
+					
+					if(i < this.GRID_DIMENSION - 1)
+						if(this.grid[i][j].getValue() == this.grid[i+1][j].getValue()) return false;
+					
+					if(j < this.GRID_DIMENSION - 1)
+						if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()) return false;
+					
+				}
+				
+			}
+			
+		}
+		
+		return true;
+		
 		
 	}
 
