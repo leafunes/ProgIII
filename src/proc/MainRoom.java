@@ -38,6 +38,10 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
+	public void leftKey(){
+		
+	}
+	
 	@Override
 	public void init(){
 		
