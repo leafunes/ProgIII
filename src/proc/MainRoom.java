@@ -8,13 +8,22 @@ import engine.Key;
 public class MainRoom extends GameRoom {
 	
 	private Random gen;
-	private int gridDimension;
 	private Cell[][] grid;
 	
-	public MainRoom(int dimension, Random gen) {
+	private final int GRID_DIMENSION;
+	private final int GRID_X_OFFSET;
+	private final int GRID_Y_OFFSET;
+	private final int CELL_DIMENSION;
+	
+	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset, Random gen) {
 		super(800, 600);
-		this.gridDimension = dimension;
-		this.grid = new Cell[dimension][dimension];
+		
+		this.GRID_DIMENSION = gridDimesion;
+		this.CELL_DIMENSION = cellDimension;
+		this.GRID_X_OFFSET = xOffset;
+		this.GRID_Y_OFFSET = yOffset;
+		
+		this.grid = new Cell[gridDimesion][gridDimesion];
 		
 		this.gen = gen;
 		//Crea los objetos iniciales
@@ -22,17 +31,23 @@ public class MainRoom extends GameRoom {
 		this.init();
 	}
 
-	public MainRoom(int dimension) {
-		this(dimension, new Random());
+	public MainRoom(int cellDimension, int dimension, int xOffset, int yOffset) {
+		this(cellDimension, dimension, xOffset, yOffset, new Random());
 		
 	}
 	
 	public void rigthKey(){
-		int iNull = 0;
-		int jNull = 0;
 		
-		for(int i = 0; i < this.gridDimension; i++){
-			for(int j = this.gridDimension - 2; j >= 0; j--){
+		for(int i = 0; i < this.GRID_DIMENSION; i++){
+			
+			//Recorro el grid por fila, pero sin iterar sobre la primer columna
+			
+			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
+				if(this.grid [i][j] == null){
+					this.grid[i][j] = this.grid[i][j-1];
+					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
+					this.grid[i][j-1] = null;
+				}
 			}
 		}
 		
