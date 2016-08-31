@@ -42,11 +42,10 @@ public abstract class Game {
 		
 	}
 	
-	public abstract void behavior();
-	
 	public void eventKeyPress(Key k){
 		this.currentRoom.eventKeyPress(k);
 	}
 	
+	public abstract void behavior();
 
 }

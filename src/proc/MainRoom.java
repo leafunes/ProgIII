@@ -2,8 +2,6 @@ package proc;
 
 import java.util.Random;
 
-import org.eclipse.jface.text.WhitespaceCharacterPainter;
-
 import engine.GameRoom;
 import engine.Key;
 
