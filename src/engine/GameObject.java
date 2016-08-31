@@ -16,7 +16,7 @@ public abstract class GameObject {
 	
 	private Drawable drawable;
 	
-	public GameObject(int x, int y, int width, int height){
+	public GameObject(int x, int y, int width, int height, Sprite spr){
 		this.posX = x;
 		this.posY = y;
 		
@@ -24,7 +24,8 @@ public abstract class GameObject {
 		
 		this.width = width;
 		this.height = height;
-		this.drawable = new Drawable(this.posX, this.posY);
+		
+		this.drawable = new Drawable(this.posX, this.posY, spr);
 	}
 	
 	public void translate(int x, int y, boolean absolute){
@@ -61,7 +62,7 @@ public abstract class GameObject {
 		if(this.isMoving)
 			this.actualizePosition();
 		
-		this.drawable.actualize(this.posX, this.posY);
+		this.drawable.actualizePosition(this.posX, this.posY);
 		
 		this.behavior();
 		
