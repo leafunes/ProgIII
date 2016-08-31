@@ -1,13 +1,14 @@
 package engine;
 
-import org.eclipse.swt.graphics.Image;
+import java.awt.image.BufferedImage;
+
 
 public class Drawable {
 	
 	public int x;
 	public int y;
 	
-	public Image actualFrame;
+	public BufferedImage actualFrame;
 	
 	private Sprite sprite;
 	private int spriteIndex; 

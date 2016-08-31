@@ -64,6 +64,9 @@ public abstract class GameObject {
 		
 		this.drawable.actualizePosition(this.posX, this.posY);
 		
+		//TODO: Hay que agregarle un speed
+		this.drawable.nextFrame();
+		
 		this.behavior();
 		
 	}

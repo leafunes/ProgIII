@@ -5,10 +5,11 @@ import engine.GameRoom;
 
 public class Game2048 extends Game {
 
-	public Game2048(GameRoom mainRoom) {
+	public Game2048() {
 		
-		super(mainRoom);
-		//GameRoom mainRoom = new MainRoom();
+		super();
+		GameRoom mainRoom = new MainRoom(32, 4, 0, 0);
+		super.addRoom(mainRoom);
 		// TODO Auto-generated constructor stub
 	}
 

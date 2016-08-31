@@ -17,6 +17,12 @@ public abstract class Game {
 		this.currentRoomPtr = 0;
 	}
 	
+	public Game(){
+		this.rooms = new ArrayList<>();
+		
+		this.currentRoomPtr = 0;
+	}
+	
 	public void addRoom(GameRoom room){
 		this.rooms.add(room);
 	}
@@ -47,5 +53,4 @@ public abstract class Game {
 	}
 	
 	public abstract void behavior();
-
 }

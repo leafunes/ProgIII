@@ -8,7 +8,7 @@ public class GameObjectTest {
 
 	@Test
 	public void actualizePositionTest() {
-		GameObject obj = new GameObject(10,10,1,1) {
+		GameObject obj = new GameObject(10,10,1,1,null) {
 			
 			@Override
 			public void behavior() {
