@@ -4,6 +4,8 @@ import java.util.Random;
 
 import engine.GameRoom;
 import engine.Key;
+import engine.Sprite;
+
 
 public class MainRoom extends GameRoom {
 	
@@ -80,7 +82,7 @@ public class MainRoom extends GameRoom {
 				
 				if(this.grid[randI][randJ] == null){
 					int cellValue = (this.gen.nextInt(1) + 1) * 2;
-					this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue);
+					this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue, Sprites.cellSprite);
 					this.freePlaces --;
 					break;
 				}
