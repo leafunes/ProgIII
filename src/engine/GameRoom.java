@@ -33,6 +33,10 @@ public abstract class GameRoom {
 		return this.drawables;
 	}
 	
+	public void changeRoom(Game game, int pos){
+		game.changeRoom(pos);
+	}
+	
 	public abstract void behavior();
 	
 	public abstract void eventKeyPress(Key k);

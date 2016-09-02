@@ -9,7 +9,7 @@ public class Game2048 extends Game {
 		
 		super();
 		GameRoom mainRoom = new MainRoom(32, 4, 0, 0);
-		super.addRoom(mainRoom);
+		super.addRoom(mainRoom,0);
 		// TODO Auto-generated constructor stub
 	}
 

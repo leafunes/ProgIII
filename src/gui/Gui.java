@@ -8,14 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import org.eclipse.swt.graphics.Image;
-
-import com.ibm.icu.impl.duration.TimeUnit;
 
 import proc.Game2048;
-import java.awt.Panel;
 
 public class Gui {
 
@@ -76,12 +70,14 @@ public class Gui {
 		
 		Graphics g = this.panel.getGraphics();
 		
-		for(int i = 0; i<1000; i=i+2){
+		for(int i = 0; i<500; i++){
 
-			this.panel.paintImage(g,image, 20+i, 20);
-			Thread.sleep(15);
+			this.panel.paintImage(g,image, 20+i, 20+i);
+			this.panel.paintImage(g,image2, 160+i, 160);
+
+			Thread.sleep(33);
+			this.panel.actualize(g);
 			
-			//this.panel.paintImage(g,image2, 160+i, 160);
 		}
 	}
 }

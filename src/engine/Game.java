@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public abstract class Game {
 	
 	private ArrayList<GameRoom> rooms;
-	private int currentRoomPtr;
 	public boolean isGameOver;
 	private GameRoom currentRoom;
 	
@@ -14,26 +13,23 @@ public abstract class Game {
 		this.rooms = new ArrayList<>();
 		this.rooms.add(mainRoom);
 		
-		this.currentRoomPtr = 0;
 	}
 	
 	public Game(){
 		this.rooms = new ArrayList<>();
 		
-		this.currentRoomPtr = 0;
 	}
 	
-	public void addRoom(GameRoom room){
-		this.rooms.add(room);
+	public void addRoom(GameRoom room, int pos){
+		this.rooms.add(pos, room);
 	}
 	
-	public void nextRoom(){
-		this.currentRoomPtr++;
+	public void changeRoom(int pos){
 		
-		if(this.currentRoomPtr >= this.rooms.size())
-			throw new ArrayIndexOutOfBoundsException("No hay siguiente room");
+		if(pos >= this.rooms.size())
+			throw new ArrayIndexOutOfBoundsException("No existe el cuarto");
 		
-		this.currentRoom = this.rooms.get(this.currentRoomPtr);
+		this.currentRoom = this.rooms.get(pos);
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
