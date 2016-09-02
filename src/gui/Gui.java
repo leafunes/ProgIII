@@ -116,6 +116,8 @@ public class Gui{
 			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
 		}
 		
+		window.panel.paintText(g, "Hola belen", 10, 10);
+		
 		Thread.sleep(150);
 		
 		this.frame.repaint();

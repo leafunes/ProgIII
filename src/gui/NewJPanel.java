@@ -16,5 +16,11 @@ public class NewJPanel extends JPanel{
 		 
 	 }
 	 
+	 public void paintText(Graphics g, String str, int x, int y){
+		 
+		 g.drawString(str, x, y);
+		 
+	 }
+	 
 
 }
