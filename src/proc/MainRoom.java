@@ -4,7 +4,6 @@ import java.util.Random;
 
 import engine.GameRoom;
 import engine.Key;
-import engine.Sprite;
 
 
 public class MainRoom extends GameRoom {
@@ -12,7 +11,7 @@ public class MainRoom extends GameRoom {
 	private Random gen;
 	private Cell[][] grid;
 	
-	private boolean sometingMoved;
+	private boolean somethingActualized;
 	private int freePlaces;
 	
 	private final int GRID_DIMENSION;
@@ -51,7 +50,7 @@ public class MainRoom extends GameRoom {
 			
 			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
 				if(this.grid [i][j] == null){
-					this.sometingMoved = true;
+					this.somethingActualized = true;
 					
 					this.grid[i][j] = this.grid[i][j-1];
 					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
@@ -73,8 +72,8 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void behavior() {
-		if(this.sometingMoved){
-			this.sometingMoved = false;
+		if(this.somethingActualized){
+			this.somethingActualized = false;
 			
 			while(true){
 				int randI = this.gen.nextInt(this.GRID_DIMENSION);
