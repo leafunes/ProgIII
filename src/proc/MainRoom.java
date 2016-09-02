@@ -1,15 +1,32 @@
 package proc;
 
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Random;
 
+import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 
 
+
+
 public class MainRoom extends GameRoom {
+	
+	private class Point{
+		int x;
+		int y;
+		
+		Point(int x, int y){
+			this.x = x;
+			this.y = y;
+		}
+	}
 	
 	private Random gen;
 	private Cell[][] grid;
+	
+	private ArrayList<Point> toDestroyMoving;
 	
 	private boolean somethingActualized;
 	private int freePlaces;
@@ -26,6 +43,8 @@ public class MainRoom extends GameRoom {
 		this.CELL_DIMENSION = cellDimension;
 		this.GRID_X_OFFSET = xOffset;
 		this.GRID_Y_OFFSET = yOffset;
+		
+		this.toDestroyMoving = new ArrayList<>();
 		
 		this.freePlaces = gridDimesion*gridDimesion;
 		
@@ -54,7 +73,16 @@ public class MainRoom extends GameRoom {
 					
 					this.grid[i][j] = this.grid[i][j-1];
 					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
-					this.grid[i][j-1] = null;
+					this.destroyObject(i,j-1);
+					
+				}
+				
+				else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
+					this.somethingActualized = true;
+					this.grid[i][j].move(GRID_X_OFFSET + (CELL_DIMENSION * (j + 1)) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
+					this.toDestroyMoving.add(new Point(i,j));
+					
+					this.freePlaces++;
 				}
 			}
 		}
@@ -76,14 +104,6 @@ public class MainRoom extends GameRoom {
 					this.grid[i][j-1] = null;
 				}
 				
-				else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
-					this.somethingActualized = true;
-					this.grid[i][j].move(GRID_X_OFFSET + (CELL_DIMENSION * (j + 1)) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
-					
-					
-					this.freePlaces++;
-				}
-				
 			}
 		}
 		
@@ -99,7 +119,12 @@ public class MainRoom extends GameRoom {
 			
 			if(this.grid[randI][randJ] == null){
 				int cellValue = (this.gen.nextInt(1) + 1) * 2;
-				this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue, Sprites.cellSprite);
+				
+				Cell newCell = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue, Sprites.cellSprite);
+				
+				this.addObject(newCell);
+				
+				this.grid[randI][randJ] = newCell;
 				this.freePlaces --;
 				counter++;
 			}
@@ -124,6 +149,12 @@ public class MainRoom extends GameRoom {
 			this.addCells(howManyCells);
 			
 			}
+		
+		for(Point toDestroy: this.toDestroyMoving){
+			
+			if(!grid[toDestroy.x][toDestroy.y].isMoving()) destroyObject(toDestroy.x, toDestroy.y);
+			
+		}
 	}
 		
 
@@ -147,6 +178,13 @@ public class MainRoom extends GameRoom {
 	@Override
 	public void eventClick(int x, int y) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private void destroyObject(int i, int j) {
+		super.destroyObject(this.grid[i][j]);
+		
+		this.grid[i][j] = null;
 		
 	}
 

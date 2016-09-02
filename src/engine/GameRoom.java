@@ -37,6 +37,15 @@ public abstract class GameRoom {
 		game.changeRoom(pos);
 	}
 	
+	public void destroyObject(GameObject object){
+		int index = this.objects.indexOf(object);
+		
+		object = null;
+		
+		this.objects.remove(index);
+		
+	}
+	
 	public abstract void behavior();
 	
 	public abstract void eventKeyPress(Key k);
