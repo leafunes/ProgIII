@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import engine.Drawable;
 import proc.Game2048;
 
 public class Gui {
@@ -63,21 +65,31 @@ public class Gui {
 	private void mainLoop() throws IOException, InterruptedException{
 		//Aca se hace el while true, haciendo los steps del game2048
 		
-		
-		//Esto es un ejemplo de como imprimir BufferedImages
-		final BufferedImage image = ImageIO.read(new File(".\\sprites\\cell\\0.png"));
-		final BufferedImage image2 = ImageIO.read(new File(".\\sprites\\cell\\0.png"));
-		
 		Graphics g = this.panel.getGraphics();
-		//Hola
-		for(int i = 0; i<500; i++){
+		
+		//creo un arreglo donde voy a guardar todos los drawables a dibujar
+		ArrayList<Drawable> drawablesList= new ArrayList<>();
+		
+		while(true){
+			newGame.step(); //actualizo el juego
 
-			this.panel.paintImage(g,image, 20+i, 20+i);
-			this.panel.paintImage(g,image2, 160+i, 160);
-
+			//le pido al juego en curso cuales son sus drawables
+			drawablesList=newGame.getDrawables();
+			System.out.println(drawablesList.size());
+			//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
+			//recorro el arreglo de drawables y los voy dibujando
+			for (Drawable toDraw : drawablesList){
+				
+				
+				this.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
+			}
+			
 			Thread.sleep(33);
+			
 			this.panel.actualize(g);
 			
 		}
+		
+
 	}
 }
