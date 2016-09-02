@@ -48,5 +48,10 @@ public abstract class Game {
 		this.currentRoom.eventKeyPress(k);
 	}
 	
+	public void eventClick(int x, int y){
+		this.currentRoom.eventClick(x, y);
+		
+	}
+	
 	public abstract void behavior();
 }

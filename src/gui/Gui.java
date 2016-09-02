@@ -2,21 +2,29 @@ package gui;
 
 import java.awt.EventQueue;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import engine.Drawable;
+import engine.Key;
 import proc.Game2048;
+import javax.swing.JLabel;
 
-public class Gui {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Gui{
 
 	private JFrame frame;
 	private Game2048 newGame = new Game2048();
+	private static Gui window;
+	
 	NewJPanel panel;
 
 	/**
@@ -26,7 +34,8 @@ public class Gui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Gui window = new Gui();
+					window = new Gui();
+					
 					window.frame.setVisible(true);
 					
 					window.mainLoop();
@@ -51,45 +60,67 @@ public class Gui {
 	 */
 	private void initialize(){
 		frame = new JFrame();
+		frame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent click) {
+				newGame.eventClick(click.getX(),click.getY());
+				
+			}
+		});
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				newGame.eventKeyPress(Key.K_RIGHT);
+			}
+			
+		});
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new NewJPanel();
-		panel.setBounds(12, 12, 424, 251);
+		panel.setBounds(0, 0, 442, 273);
 		frame.getContentPane().add(panel);
 		
+		  new javax.swing.Timer(10, new ActionListener() {
+			     public void actionPerformed(ActionEvent e) {
+
+			        try {
+						mainLoop();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			     }
+			  }).start();
 		
 	}
 	
-	private void mainLoop() throws IOException, InterruptedException{
-		//Aca se hace el while true, haciendo los steps del game2048
+	private void mainLoop() throws InterruptedException{
 		
-		Graphics g = this.panel.getGraphics();
+		Graphics g = window.panel.getGraphics();
 		
 		//creo un arreglo donde voy a guardar todos los drawables a dibujar
 		ArrayList<Drawable> drawablesList= new ArrayList<>();
 		
-		while(true){
-			newGame.step(); //actualizo el juego
-
-			//le pido al juego en curso cuales son sus drawables
-			drawablesList=newGame.getDrawables();
-			System.out.println(drawablesList.size());
-			//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
-			//recorro el arreglo de drawables y los voy dibujando
-			for (Drawable toDraw : drawablesList){
-				
-				
-				this.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
-			}
 			
-			Thread.sleep(33);
-			
-			this.panel.actualize(g);
-			
+		newGame.step(); //actualizo el juego
+		
+		
+		//le pido al juego en curso cuales son sus drawables
+		drawablesList=newGame.getDrawables();
+		//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
+		//recorro el arreglo de drawables y los voy dibujando
+		for (Drawable toDraw : drawablesList){
+			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
 		}
 		
+		Thread.sleep(150);
+		
+		this.frame.repaint();
 
 	}
 }
+
+

@@ -8,19 +8,12 @@ import javax.swing.JPanel;
 public class NewJPanel extends JPanel{
 	
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	 
-	 public void paintImage(Graphics g, BufferedImage image, int x, int y) throws InterruptedException{
+	 public void paintImage(Graphics g, BufferedImage image, int x, int y){
 
          g.drawImage(image, x, y, null);
 		 
-	 }
-	 
-	 public void actualize(Graphics g){
-		 this.paint(g);
 	 }
 	 
 

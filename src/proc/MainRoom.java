@@ -68,7 +68,7 @@ public class MainRoom extends GameRoom {
 			//Recorro el grid por fila, pero sin iterar sobre la primer columna
 			
 			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
-				if(this.grid [i][j] == null){
+				if(this.grid [i][j] == null && this.grid[i][j-1] != null){
 					this.somethingActualized = true;
 					
 					this.grid[i][j] = this.grid[i][j-1];
@@ -77,13 +77,13 @@ public class MainRoom extends GameRoom {
 					
 				}
 				
-				else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
+				/*else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
 					this.somethingActualized = true;
 					this.grid[i][j].move(GRID_X_OFFSET + (CELL_DIMENSION * (j + 1)) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
 					this.toDestroyMoving.add(new Point(i,j));
 					
 					this.freePlaces++;
-				}
+				}*/
 			}
 		}
 		

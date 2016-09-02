@@ -8,7 +8,7 @@ import engine.Sprite;
 final class CellSprite extends Sprite{
 
 	public CellSprite() {
-		super("./sprites/cell", 1);
+		super(".\\sprites\\cell", 1);
 	}
 	
 }
