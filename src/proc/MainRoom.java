@@ -89,15 +89,28 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
-	public void addCell(int i, int j, int value){
-		this.grid[i][j] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), value, Sprites.cellSprite);
-		this.freePlaces --;
+	private void addCells(int howMany){
+		
+		int counter = 0;
+		
+		while(counter < howMany){
+			int randI = this.gen.nextInt(this.GRID_DIMENSION);
+			int randJ = this.gen.nextInt(this.GRID_DIMENSION);
+			
+			if(this.grid[randI][randJ] == null){
+				int cellValue = (this.gen.nextInt(1) + 1) * 2;
+				this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue, Sprites.cellSprite);
+				this.freePlaces --;
+				counter++;
+			}
+		}
+		
 	}
 	
 	@Override
 	public void init(){
 		
-		
+		this.addCells(2);
 		
 	}
 
@@ -106,20 +119,13 @@ public class MainRoom extends GameRoom {
 		if(this.somethingActualized){
 			this.somethingActualized = false;
 			
-			while(true){
-				int randI = this.gen.nextInt(this.GRID_DIMENSION);
-				int randJ = this.gen.nextInt(this.GRID_DIMENSION);
-				
-				if(this.grid[randI][randJ] == null){
-					int cellValue = (this.gen.nextInt(1) + 1) * 2;
-					this.grid[randI][randJ] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * randJ) ,GRID_Y_OFFSET + (CELL_DIMENSION * randI), cellValue, Sprites.cellSprite);
-					this.freePlaces --;
-					break;
-				}
+			int howManyCells = this.gen.nextInt(1)+1;
+			
+			this.addCells(howManyCells);
+			
 			}
-		}
-		
 	}
+		
 
 	@Override
 	public void eventKeyPress(Key k) {
