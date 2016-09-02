@@ -63,10 +63,41 @@ public class MainRoom extends GameRoom {
 	
 	private void leftKey(){
 		
+		for(int i = 0; i < this.GRID_DIMENSION; i++){
+			
+			//Recorro el grid por fila, pero sin iterar sobre la primer columna
+			
+			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
+				if(this.grid [i][j] == null){
+					this.somethingActualized = true;
+					
+					this.grid[i][j] = this.grid[i][j-1];
+					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
+					this.grid[i][j-1] = null;
+				}
+				
+				else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
+					this.somethingActualized = true;
+					this.grid[i][j].move(GRID_X_OFFSET + (CELL_DIMENSION * (j + 1)) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
+					
+					
+					this.freePlaces++;
+				}
+				
+			}
+		}
+		
+	}
+	
+	public void addCell(int i, int j, int value){
+		this.grid[i][j] = new Cell(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), value, Sprites.cellSprite);
+		this.freePlaces --;
 	}
 	
 	@Override
 	public void init(){
+		
+		
 		
 	}
 
@@ -95,6 +126,10 @@ public class MainRoom extends GameRoom {
 		switch(k){
 			case K_RIGHT:
 				this.rigthKey();
+				break;
+				
+			case K_LEFT:
+				this.leftKey();
 				break;
 				
 			default:
