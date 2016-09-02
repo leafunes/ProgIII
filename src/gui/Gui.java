@@ -65,11 +65,11 @@ public class Gui {
 		
 		
 		//Esto es un ejemplo de como imprimir BufferedImages
-		final BufferedImage image = ImageIO.read(new File("/home/leandro/workspace/TpProgIII/sprites/cell/0.png"));
-		final BufferedImage image2 = ImageIO.read(new File("/home/leandro/workspace/TpProgIII/sprites/cell/0.png"));
+		final BufferedImage image = ImageIO.read(new File(".\\sprites\\cell\\0.png"));
+		final BufferedImage image2 = ImageIO.read(new File(".\\sprites\\cell\\0.png"));
 		
 		Graphics g = this.panel.getGraphics();
-		
+		//Hola
 		for(int i = 0; i<500; i++){
 
 			this.panel.paintImage(g,image, 20+i, 20+i);
