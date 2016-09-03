@@ -20,7 +20,7 @@ public class Sprite {
 		this.length = 0;
 		
 		while(this.length < framesLen){
-			file = new File(folderRoute + "/"+this.length+".png");
+			file = new File(folderRoute + File.separator+this.length+".png");
 			
 			if(!file.exists())
 				throw new IllegalArgumentException("No se encontro el archivo, " + file.getAbsolutePath());
