@@ -49,35 +49,13 @@ public class MainRoom extends GameRoom {
 	
 	private void rigthKey(){
 		
-		for(int i = 0; i < GRID_DIMENSION; i++){
-			for(int j = GRID_DIMENSION -1; j >= 0; j--){
-				moveCellRigth(i, j);
-			}
-		}
+		
 		
 		
 	}
 	
 	private void leftKey(){
 		
-		
-	}
-	
-	private void moveCellRigth(int i, int j){
-		Cell cell = grid[i][j];
-		
-		if(cell == null && j > 0){
-			for(int k = GRID_DIMENSION - 1; k >= 0; k--){
-				if(grid[i][k] != null){
-					this.somethingActualized = true;
-					moveCell(i, j, i, k);
-				}
-			}
-		}
-		
-		else if(j < GRID_DIMENSION -1){
-			Cell otherCell = grid[i][j+1];
-		}
 		
 	}
 	
@@ -103,15 +81,7 @@ public class MainRoom extends GameRoom {
 		}
 		
 	}
-	
-	private void moveCell(int iFrom, int jFrom, int iTo, int jTo){
-		
 
-		grid[iFrom][jFrom] = grid[iTo][jTo];
-		grid[iTo][jTo] = null;
-		grid[iFrom][jFrom].move(jFrom*CELL_DIMENSION + GRID_X_OFFSET, iFrom*CELL_DIMENSION + GRID_Y_OFFSET, 1);
-		
-	}
 	
 	@Override
 	public void init(){
