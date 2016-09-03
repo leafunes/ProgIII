@@ -1,35 +1,21 @@
 package proc;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
-import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 
-
-
-
 public class MainRoom extends GameRoom {
-	
-	private class Point{
-		int x;
-		int y;
-		
-		Point(int x, int y){
-			this.x = x;
-			this.y = y;
-		}
-	}
 	
 	private Random gen;
 	private Cell[][] grid;
 	
-	private ArrayList<Point> toDestroyMoving;
-	
 	private boolean somethingActualized;
 	private int freePlaces;
+	
+	private HashSet<Cell> cellsToDestroy;
 	
 	private final int GRID_DIMENSION;
 	private final int GRID_X_OFFSET;
@@ -44,7 +30,7 @@ public class MainRoom extends GameRoom {
 		this.GRID_X_OFFSET = xOffset;
 		this.GRID_Y_OFFSET = yOffset;
 		
-		this.toDestroyMoving = new ArrayList<>();
+		this.cellsToDestroy = new HashSet<>();
 		
 		this.freePlaces = gridDimesion*gridDimesion;
 		
@@ -63,48 +49,34 @@ public class MainRoom extends GameRoom {
 	
 	private void rigthKey(){
 		
-		for(int i = 0; i < this.GRID_DIMENSION; i++){
-			
-			//Recorro el grid por fila, pero sin iterar sobre la primer columna
-			
-			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
-				if(this.grid [i][j] == null && this.grid[i][j-1] != null){
-					this.somethingActualized = true;
-					
-					this.grid[i][j] = this.grid[i][j-1];
-					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
-					this.destroyObject(i,j-1);
-					
-				}
-				
-				/*else if(this.grid[i][j].getValue() == this.grid[i][j+1].getValue()){
-					this.somethingActualized = true;
-					this.grid[i][j].move(GRID_X_OFFSET + (CELL_DIMENSION * (j + 1)) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
-					this.toDestroyMoving.add(new Point(i,j));
-					
-					this.freePlaces++;
-				}*/
+		for(int i = 0; i < GRID_DIMENSION; i++){
+			for(int j = GRID_DIMENSION -1; j >= 0; j--){
+				moveCellRigth(i, j);
 			}
 		}
+		
 		
 	}
 	
 	private void leftKey(){
 		
-		for(int i = 0; i < this.GRID_DIMENSION; i++){
-			
-			//Recorro el grid por fila, pero sin iterar sobre la primer columna
-			
-			for(int j = this.GRID_DIMENSION - 1; j >= 1; j--){			
-				if(this.grid [i][j] == null){
+		
+	}
+	
+	private void moveCellRigth(int i, int j){
+		Cell cell = grid[i][j];
+		
+		if(cell == null && j > 0){
+			for(int k = GRID_DIMENSION - 1; k >= 0; k--){
+				if(grid[i][k] != null){
 					this.somethingActualized = true;
-					
-					this.grid[i][j] = this.grid[i][j-1];
-					this.grid[i][j-1].move(GRID_X_OFFSET + (CELL_DIMENSION * j) ,GRID_Y_OFFSET + (CELL_DIMENSION * i), 1);
-					this.grid[i][j-1] = null;
+					moveCell(i, j, i, k);
 				}
-				
 			}
+		}
+		
+		else if(j < GRID_DIMENSION -1){
+			Cell otherCell = grid[i][j+1];
 		}
 		
 	}
@@ -132,6 +104,15 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
+	private void moveCell(int iFrom, int jFrom, int iTo, int jTo){
+		
+
+		grid[iFrom][jFrom] = grid[iTo][jTo];
+		grid[iTo][jTo] = null;
+		grid[iFrom][jFrom].move(jFrom*CELL_DIMENSION + GRID_X_OFFSET, iFrom*CELL_DIMENSION + GRID_Y_OFFSET, 1);
+		
+	}
+	
 	@Override
 	public void init(){
 		
@@ -150,11 +131,16 @@ public class MainRoom extends GameRoom {
 			
 			}
 		
-		for(Point toDestroy: this.toDestroyMoving){
-			
-			if(!grid[toDestroy.x][toDestroy.y].isMoving()) destroyObject(toDestroy.x, toDestroy.y);
-			
+		
+		
+		for(Cell toDestroy: this.cellsToDestroy){
+			if(!toDestroy.isMoving()){
+				this.destroyObject(toDestroy);
+				this.freePlaces++;
+			}
 		}
+		
+		this.cellsToDestroy.clear();
 	}
 		
 
@@ -178,13 +164,6 @@ public class MainRoom extends GameRoom {
 	@Override
 	public void eventClick(int x, int y) {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	private void destroyObject(int i, int j) {
-		super.destroyObject(this.grid[i][j]);
-		
-		this.grid[i][j] = null;
 		
 	}
 

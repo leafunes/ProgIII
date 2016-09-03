@@ -10,6 +10,10 @@ public class Drawable {
 	
 	public BufferedImage actualFrame;
 	
+	public String string = "";
+	public int xStr;
+	public int yStr;
+	
 	private Sprite sprite;
 	private int spriteIndex; 
 
@@ -24,6 +28,12 @@ public class Drawable {
 	public void actualizePosition(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void actualizeText(int x, int y, String str){
+		this.xStr = x;
+		this.yStr = y;
+		this.string = str;
 	}
 	
 	protected void nextFrame(){

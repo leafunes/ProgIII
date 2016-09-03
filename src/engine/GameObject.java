@@ -2,8 +2,8 @@ package engine;
 
 public abstract class GameObject {
 	
-	private int posX;
-	private int posY;
+	protected int posX;
+	protected int posY;
 	
 	private int xDest;
 	private int yDest;
@@ -14,7 +14,7 @@ public abstract class GameObject {
 	private int width;
 	private int height;
 	
-	private Drawable drawable;
+	protected Drawable drawable;
 	
 	public GameObject(int x, int y, int width, int height, Sprite spr){
 		this.posX = x;

@@ -38,11 +38,9 @@ public abstract class GameRoom {
 	}
 	
 	public void destroyObject(GameObject object){
-		int index = this.objects.indexOf(object);
 		
+		this.objects.remove(object);
 		object = null;
-		
-		this.objects.remove(index);
 		
 	}
 	

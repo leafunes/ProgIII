@@ -8,7 +8,7 @@ public class Cell extends GameObject {
 	private int value;
 
 	public Cell(int x ,int y, int value, Sprite spr) {
-		super(x, y, 32, 32,spr);
+		super(x, y, 64, 64,spr);
 		
 		this.value = value;
 		
@@ -16,7 +16,7 @@ public class Cell extends GameObject {
 
 	@Override
 	public void behavior() {
-		// TODO Auto-generated method stub
+		this.drawable.actualizeText(super.posX+32, super.posY+32, String.valueOf(this.value));
 
 	}
 	

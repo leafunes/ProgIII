@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import engine.Drawable;
 import engine.Key;
 import proc.Game2048;
-import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -114,9 +113,9 @@ public class Gui{
 		//recorro el arreglo de drawables y los voy dibujando
 		for (Drawable toDraw : drawablesList){
 			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
+			window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
 		}
 		
-		window.panel.paintText(g, "Hola belen", 10, 10);
 		
 		Thread.sleep(150);
 		
