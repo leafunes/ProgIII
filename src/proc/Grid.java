@@ -29,11 +29,29 @@ public class Grid {
 		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
-		this.grid[0][0] = new Cell((0)*CELL_DIMENSION + X_OFFSET, 0*CELL_DIMENSION + Y_OFFSET,2 ,Sprites.cellSprite);
-		this.grid[0][2] = new Cell((2)*CELL_DIMENSION + X_OFFSET, 0*CELL_DIMENSION + Y_OFFSET,2,Sprites.cellSprite);
-		this.grid[1][1] = new Cell((1)*CELL_DIMENSION + X_OFFSET, 1*CELL_DIMENSION + Y_OFFSET,2 ,Sprites.cellSprite);
-
-		this.grid[3][3] = new Cell((3)*CELL_DIMENSION + X_OFFSET, 3*CELL_DIMENSION + Y_OFFSET,2 ,Sprites.cellSprite);
+		this.addCells(6);
+		
+	}
+	
+	private void addCells(int howMany){
+		
+		int randI = gen.nextInt(DIMENSION);
+		int randJ = gen.nextInt(DIMENSION);
+		int cellValue = (gen.nextInt(1)*2)+2;
+		
+		int counter = 0;
+		
+		while(counter < howMany ){
+			if(grid[randI][randJ] == null){
+				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue, Sprites.cellSprite);
+				counter++;
+			}
+			else{
+				randI = gen.nextInt(DIMENSION);
+				randJ = gen.nextInt(DIMENSION);
+			}
+		}
+		
 		
 	}
 	

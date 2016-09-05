@@ -89,7 +89,7 @@ public class Gui{
 		panel.setBounds(0, 0, 442, 273);
 		frame.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(33, new ActionListener() {
+		  new javax.swing.Timer(50, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
