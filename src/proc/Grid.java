@@ -44,7 +44,7 @@ public class Grid {
 				
 			}
 			else if(grid[i][j].getValue() == grid[i][notNull].getValue()){
-				grid[i][j].setValue();
+				grid[i][j].moveAndsetValue();
 				grid[i][notNull].moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, 5);
 					
 				
