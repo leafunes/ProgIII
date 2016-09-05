@@ -82,7 +82,7 @@ public class Gui{
 		panel.setBounds(0, 0, 442, 273);
 		frame.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(3, new ActionListener() {
+		  new javax.swing.Timer(33, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
@@ -97,8 +97,11 @@ public class Gui{
 	}
 	
 	private void mainLoop() throws InterruptedException{
+
 		
 		Graphics g = window.panel.getGraphics();
+		//Se borra las imagenes anteriores
+		this.panel.paint(g);
 		
 		//creo un arreglo donde voy a guardar todos los drawables a dibujar
 		ArrayList<Drawable> drawablesList= new ArrayList<>();
@@ -117,9 +120,6 @@ public class Gui{
 		}
 		
 		
-		Thread.sleep(40);
-		
-		this.frame.repaint();
 
 	}
 }
