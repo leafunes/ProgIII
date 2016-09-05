@@ -4,6 +4,8 @@ public abstract class GameObject {
 	
 	protected int posX;
 	protected int posY;
+
+	public boolean destroyMe;
 	
 	private int xDest;
 	private int yDest;
@@ -11,8 +13,8 @@ public abstract class GameObject {
 	
 	private boolean isMoving;
 	
-	private int width;
-	private int height;
+	protected int width;
+	protected int height;
 	
 	protected Drawable drawable;
 	
@@ -21,6 +23,7 @@ public abstract class GameObject {
 		this.posY = y;
 		
 		this.isMoving = false;
+		this.destroyMe = false;
 		
 		this.width = width;
 		this.height = height;
@@ -51,6 +54,11 @@ public abstract class GameObject {
 		this.velocity = velocity;
 		
 		this.isMoving = true;
+	}
+	
+	public void stopMoving(){
+		this.xDest = this.posX;
+		this.yDest = this.posY;
 	}
 	
 	public Drawable getDrawable(){
@@ -84,7 +92,7 @@ public abstract class GameObject {
 			if(distX == 0)
 				delta = Math.toRadians( Math.signum(distY) * 90 );
 			else if(distY == 0)
-				delta = Math.toRadians( Math.signum(distX) > 0? 0:180 );
+				delta = Math.toRadians( Math.signum(distX) > 0? 180:0 );
 			else{
 				delta = Math.atan( (float)(distX/distY) );
 				
@@ -117,6 +125,8 @@ public abstract class GameObject {
 	}
 	
 	public abstract void behavior();
+
+	public abstract void collisionEvent(GameObject other);
 	
 
 }

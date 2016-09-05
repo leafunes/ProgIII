@@ -82,7 +82,7 @@ public class Gui{
 		panel.setBounds(0, 0, 442, 273);
 		frame.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(10, new ActionListener() {
+		  new javax.swing.Timer(3, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
@@ -117,7 +117,7 @@ public class Gui{
 		}
 		
 		
-		Thread.sleep(150);
+		Thread.sleep(40);
 		
 		this.frame.repaint();
 
