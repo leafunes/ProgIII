@@ -70,7 +70,14 @@ public class Gui{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
-				newGame.eventKeyPress(Key.K_RIGHT);
+				if(e.getKeyCode() == 39)
+					newGame.eventKeyPress(Key.K_RIGHT);
+				else if(e.getKeyCode() == 37)
+					newGame.eventKeyPress(Key.K_LEFT);
+				else if(e.getKeyCode() == 38)
+					newGame.eventKeyPress(Key.K_UP);
+				else if(e.getKeyCode() == 40)
+					newGame.eventKeyPress(Key.K_DOWN);
 			}
 			
 		});

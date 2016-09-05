@@ -90,7 +90,7 @@ public abstract class GameObject {
 		}
 		else{
 			if(distX == 0)
-				delta = Math.toRadians( Math.signum(distY) * 90 );
+				delta = Math.toRadians( Math.signum(distY) * -90 );
 			else if(distY == 0)
 				delta = Math.toRadians( Math.signum(distX) > 0? 180:0 );
 			else{

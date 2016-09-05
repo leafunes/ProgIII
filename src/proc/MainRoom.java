@@ -24,17 +24,6 @@ public class MainRoom extends GameRoom {
 		
 	}
 	
-	private void rigthKey(){
-		
-		grid.moveRigth();
-		
-	}
-	
-	private void leftKey(){
-		
-		
-	}
-	
 	private void addCells(int howMany){
 		//TODO
 		
@@ -57,20 +46,31 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void eventKeyPress(Key k) {
-		switch(k){
-			case K_RIGHT:
-				this.rigthKey();
-				break;
-				
-			case K_LEFT:
-				this.leftKey();
-				break;
-				
-			default:
-				break;
+		if(grid.somethingIsMoving()){
+			
+			switch(k){
+				case K_RIGHT:
+					grid.moveRigth();
+					break;
+					
+				case K_LEFT:
+					grid.moveLeft();
+					break;
+					
+				case K_UP:
+					grid.moveUp();
+					break;
+					
+				case K_DOWN:
+					grid.moveDown();
+					break;
+					
+				default:
+					break;
+			}
 		}
-		
 	}
+
 
 	@Override
 	public void eventClick(int x, int y) {
