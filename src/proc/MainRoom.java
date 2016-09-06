@@ -12,7 +12,7 @@ public class MainRoom extends GameRoom {
 	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset, Random gen) {
 		super(800, 600);
 		
-		this.grid = new Grid(4,0,0,64);
+		this.grid = new Grid(4,xOffset,yOffset,64);
 		
 		//Crea los objetos iniciales
 		
@@ -23,17 +23,10 @@ public class MainRoom extends GameRoom {
 		this(cellDimension, dimension, xOffset, yOffset, new Random());
 		
 	}
-	
-	private void addCells(int howMany){
-		//TODO
-		
-	}
 
 	
 	@Override
 	public void init(){
-		
-		this.addCells(2);
 		
 	}
 

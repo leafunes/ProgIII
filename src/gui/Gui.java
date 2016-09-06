@@ -20,7 +20,7 @@ import java.awt.event.MouseEvent;
 
 public class Gui{
 
-	private JFrame frame;
+	private JFrame frmUngs;
 	private Game2048 newGame = new Game2048();
 	private static Gui window;
 	
@@ -35,7 +35,7 @@ public class Gui{
 				try {
 					window = new Gui();
 					
-					window.frame.setVisible(true);
+					window.frmUngs.setVisible(true);
 					
 					window.mainLoop();
 					
@@ -58,15 +58,16 @@ public class Gui{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(){
-		frame = new JFrame();
-		frame.addMouseListener(new MouseAdapter() {
+		frmUngs = new JFrame();
+		frmUngs.setTitle("2048 UNGS");
+		frmUngs.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent click) {
 				newGame.eventClick(click.getX(),click.getY());
 				
 			}
 		});
-		frame.addKeyListener(new KeyAdapter() {
+		frmUngs.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
@@ -81,15 +82,15 @@ public class Gui{
 			}
 			
 		});
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmUngs.setBounds(100, 100, 600, 450);
+		frmUngs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUngs.getContentPane().setLayout(null);
 		
 		panel = new NewJPanel();
-		panel.setBounds(0, 0, 442, 273);
-		frame.getContentPane().add(panel);
+		panel.setBounds(0, 0, 584, 411);
+		frmUngs.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(33, new ActionListener() {
+		  new javax.swing.Timer(50, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        newGame.step(); //actualizo el juego
