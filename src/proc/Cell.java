@@ -19,7 +19,7 @@ public class Cell extends GameObject {
 
 	@Override
 	public void behavior() {
-		this.drawable.actualizeText(super.posX+32, super.posY+32, String.valueOf(this.value));
+		this.drawable.actualizeText(super.posX+(width/2)-8, super.posY+height/2, String.valueOf(this.value));
 		
 		if(destroyAndMove && !isMoving()) this.destroyMe = true;
 		if(moveAndValue && !isMoving()) {
