@@ -1,5 +1,7 @@
 package proc;
 
+import java.awt.image.BufferedImage;
+
 import engine.Game;
 import engine.GameRoom;
 
@@ -8,7 +10,7 @@ public class Game2048 extends Game {
 	public Game2048() {
 		
 		super();
-		GameRoom mainRoom = new MainRoom(64, 4, 150, 150);
+		GameRoom mainRoom = new MainRoom(64, 4, 170, 123);
 		GameRoom menu = new MenuRoom();
 		super.addRoom(mainRoom,0);
 		super.addRoom(menu,1);

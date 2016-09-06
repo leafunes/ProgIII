@@ -31,8 +31,8 @@ public class Grid {
 		this.toDestroy = new HashSet<>();
 		this.grid = new Cell[dimension][dimension];
 		this.DIMENSION = dimension;
-		this.X_OFFSET = 10;
-		this.Y_OFFSET = 10;
+		this.X_OFFSET = xOffset;
+		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
 		this.addCells(4);

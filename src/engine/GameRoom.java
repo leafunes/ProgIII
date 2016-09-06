@@ -10,6 +10,7 @@ public abstract class GameRoom {
 	
 	protected ArrayList<GameObject> objects;
 	protected ArrayList<Drawable> drawables;
+	protected Drawable background;
 	private int width;
 	private int height;
 	
@@ -44,6 +45,10 @@ public abstract class GameRoom {
 	
 	public ArrayList<Drawable> getDrawables(){
 		return this.drawables;
+	}
+	
+	public Drawable gretBackground(){
+		return this.background;
 	}
 	
 	public void destroyObject(GameObject object){

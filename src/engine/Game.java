@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -8,10 +9,11 @@ public abstract class Game {
 	private TreeMap<Integer,GameRoom> rooms;
 	public boolean isGameOver;
 	private GameRoom currentRoom;
+	private boolean backgroundChanged = false;
 	
 	public Game(GameRoom mainRoom){
 		this.currentRoom = mainRoom;
-		this.rooms = new TreeMap();
+		this.rooms = new TreeMap<Integer,GameRoom>();
 		this.rooms.put(0,mainRoom);
 		
 	}
@@ -31,6 +33,7 @@ public abstract class Game {
 			throw new ArrayIndexOutOfBoundsException("No existe el cuarto");
 		
 		this.currentRoom = this.rooms.get(pos);
+		this.backgroundChanged = true;
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
@@ -46,6 +49,18 @@ public abstract class Game {
 		this.behavior();
 		this.currentRoom.step();
 		
+	}
+	
+	public Drawable getBackground() {
+		return this.currentRoom.background;
+	}
+	
+	public boolean backgroundHasChanged(){
+		if(this.backgroundChanged){
+			this.backgroundChanged = false;
+			return true;
+		}
+		return false;
 	}
 	
 	public void eventKeyPress(Key k){

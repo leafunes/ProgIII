@@ -29,7 +29,8 @@ public class Sprites {
 		cells.put(2048, new Sprite(spritesPath + "2048Cell" ,1));
 	}
 
-	//public static Sprite cell = new Sprite(spritesPath + "cell" ,1);
 	public static Sprite startButton = new Sprite(spritesPath + "startButton" ,1);
+	
+	public static Sprite mainBackground = new Sprite(spritesPath + "background" ,1);
 
 }

@@ -2,6 +2,7 @@ package proc;
 
 import java.util.Random;
 
+import engine.Drawable;
 import engine.GameRoom;
 import engine.Key;
 
@@ -9,19 +10,15 @@ public class MainRoom extends GameRoom {
 	
 	private Grid grid;
 	
-	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset, Random gen) {
+	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset) {
 		super(600, 450);
+		background = new Drawable(0, 0, Sprites.mainBackground);
 		
 		this.grid = new Grid(4,xOffset,yOffset,64);
 		
 		//Crea los objetos iniciales
 		
 		this.init();
-	}
-
-	public MainRoom(int cellDimension, int dimension, int xOffset, int yOffset) {
-		this(cellDimension, dimension, xOffset, yOffset, new Random());
-		
 	}
 
 	
@@ -32,6 +29,7 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void behavior() {
+		this.drawables.add(background);
 		grid.step();
 		this.drawables.addAll(grid.getDrawables());
 	}
