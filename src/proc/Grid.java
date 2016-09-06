@@ -15,8 +15,10 @@ public class Grid {
 	private final int X_OFFSET;
 	private final int Y_OFFSET;
 	private final int CELL_DIMENSION;
-	private final int CELL_VEL = 10;
+	private final int CELL_VEL = 20;
 	ArrayList<Drawable> drawables = new ArrayList<>();
+	
+	private enum direction{RIGTH, LEFT, UP, DOWN};
 	
 	
 	public Grid(int dimension, int xOffset, int yOffset, int cellDimension){
@@ -29,7 +31,7 @@ public class Grid {
 		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
-		this.addCells(6);
+		this.addCells(8);
 		
 	}
 	
@@ -55,161 +57,91 @@ public class Grid {
 		
 	}
 	
+	private boolean moveCell(int i, int j, direction dir){
+		int newI = 0;
+		int newJ = 0;
+		
+		//Se busca la posicion de la"Siguiente" celda. 
+		//esta depende de en que direccion me este moviendo
+		
+		switch(dir){
+		//Itero por columna
+		case RIGTH:
+			//Para adelante
+			newI = i;
+			newJ = j + 1;
+			break;
+		case LEFT:
+			//apara atras
+			newI = i;
+			newJ = j - 1;
+			break;
+		//Itero por fila
+		case DOWN:
+			//Para abajo
+			newI = i + 1;
+			newJ = j;
+			break;
+		case UP:
+			//para arriba
+			newI = i - 1;
+			newJ = j ;
+			break;
+		}
+		
+		//Out of bounds
+		if(newJ >= DIMENSION  || newJ < 0 || newI >= DIMENSION || newI < 0)return false;
+		
+		//Si soy nulo muevo la celda siguiente
+		if(grid[i][j] == null)return moveCell(newI, newJ, dir);
+		
+		//Si la siguiente es nula, o la siguiente se puede mover, me muevo
+		if(grid[newI][newJ] == null || moveCell(newI, newJ, dir)){
+			
+			//Se mueve la celda graficamente
+			grid[i][j].move(newJ*CELL_DIMENSION + X_OFFSET, newI*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
+			
+			//Se actualiza la matriz
+			grid[newI][newJ] = grid[i][j];
+			grid[i][j] = null;
+			
+			//Se mueve la celda de alado
+			moveCell(newI, newJ, dir);
+			return true;
+		}
+		
+		
+		else return false;
+		
+		
+	}
 	
 	public void moveRigth(){
-
-		int notNull;
 		
-		for (int i = 0; i < DIMENSION; i++)
-		for (int j = DIMENSION -1 ; j > 0; j--)
-		for(notNull = j-1; notNull >= 0; notNull--) if( grid[i][notNull] != null){
-			
-			if(grid[i][j] == null){
-				grid[i][notNull].move(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][j] = grid[i][notNull];
-				grid[i][notNull] = null;
-				j++;
-				
-			}
-			else if(grid[i][j].getValue() == grid[i][notNull].getValue()){
-				grid[i][j].moveAndsetValue();
-				grid[i][notNull].moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				
-			}
-				
-			else{
-				grid[i][j] = grid[i][notNull];
-				grid[i][notNull].move((j - 1) *CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][notNull] = null;
-			
-			}
-			break;
-			
-			
-		}
+		for (int i = 0; i < DIMENSION; i++)moveCell(i, 0, direction.RIGTH);
 			
 	}
 	
 	public void moveUp(){
-
-		int notNull;
 		
-		for (int j = 0; j < DIMENSION; j++)
-		for (int i = 0 ; i < DIMENSION - 1; i++)
-		for(notNull = i+1; notNull < DIMENSION ; notNull++)if( grid[notNull][j] != null){
-			
-			if(grid[i][j] == null){
-				grid[notNull][j].move(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][j] = grid[notNull][j];
-				grid[notNull][j] = null;
-				i--;
-				
-			}
-			else if(grid[i][j].getValue() == grid[notNull][j].getValue()){
-				grid[i][j].moveAndsetValue();
-				grid[notNull][j].moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-					
-				
-			}
-				
-			else{
-				grid[i][j] = grid[notNull][j];
-				grid[notNull][j].move( j *CELL_DIMENSION + X_OFFSET, (i-1)*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[notNull][j] = null;
-			
-			}
-			break;
-			
-			
-		}
+		for (int j = 0; j < DIMENSION; j++)moveCell(DIMENSION - 1, j, direction.UP);
 			
 	}
 	
 	
 	public void moveLeft(){
-
-		int notNull;
 		
-		for (int i = 0; i < DIMENSION; i++)
-		for (int j = 0 ; j < DIMENSION - 1; j++)
-		for(notNull = j + 1; notNull < DIMENSION; notNull++) if( grid[i][notNull] != null){
-			
-			if(grid[i][j] == null){
-				grid[i][notNull].move(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][j] = grid[i][notNull];
-				grid[i][notNull] = null;
-				j--;
-				
-			}
-			else if(grid[i][j].getValue() == grid[i][notNull].getValue()){
-				grid[i][j].moveAndsetValue();
-				grid[i][notNull].moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-					
-				
-			}
-				
-			else{
-				grid[i][j] = grid[i][notNull];
-				grid[i][notNull].move((j + 1) *CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][notNull] = null;
-			
-			}
-			break;
-			
-			
-		}
+		for (int i = 0; i < DIMENSION; i++)moveCell(i, DIMENSION -1 , direction.LEFT);
 			
 	}
 	
 	public void moveDown(){
-
-		int notNull;
 		
-		for (int j = 0; j < DIMENSION; j++)
-		for (int i = DIMENSION -1 ; i > 0; i--)
-		for(notNull = i-1; notNull >= 0; notNull--) if( grid[notNull][j] != null){
-			
-			if(grid[i][j] == null){
-				grid[notNull][j].move(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[i][j] = grid[notNull][j];
-				grid[notNull][j] = null;
-				i++;
-				
-			}
-			else if(grid[i][j].getValue() == grid[i][notNull].getValue()){
-				grid[i][j].moveAndsetValue();
-				grid[notNull][j].moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				
-			}
-				
-			else{
-				grid[i][j] = grid[i][notNull];
-				grid[notNull][j].move(j*CELL_DIMENSION + X_OFFSET, (i+1)*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-				grid[notNull][j] = null;
-			
-			}
-			break;
-			
-			
-		}
+		for (int j = 0; j < DIMENSION; j++)moveCell(0, j, direction.DOWN);
 			
 	}
 	
 	public void step(){
-		
-		for (int i = 0; i < DIMENSION; i++){
-			
-
-			System.out.println();
-			for(int j = 0; j < DIMENSION ; j++){
-				
-				if(grid[i][j] == null) System.out.print("n");
-				else System.out.print(grid[i][j].getValue());
-				
-				
-			}
-		}
-		System.out.println("----------------");
 		
 		drawables.clear();
 		

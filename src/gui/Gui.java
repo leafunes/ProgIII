@@ -89,7 +89,14 @@ public class Gui{
 		panel.setBounds(0, 0, 442, 273);
 		frame.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(50, new ActionListener() {
+		  new javax.swing.Timer(33, new ActionListener() {
+			     public void actionPerformed(ActionEvent e) {
+
+			        newGame.step(); //actualizo el juego
+			     }
+			  }).start();
+		
+		  new javax.swing.Timer(100, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
@@ -105,22 +112,19 @@ public class Gui{
 	
 	private void mainLoop() throws InterruptedException{
 
-		
 		Graphics g = window.panel.getGraphics();
-		//Se borra las imagenes anteriores
-		this.panel.paint(g);
+
 		
 		//creo un arreglo donde voy a guardar todos los drawables a dibujar
 		ArrayList<Drawable> drawablesList= new ArrayList<>();
-		
-			
-		newGame.step(); //actualizo el juego
-		
 		
 		//le pido al juego en curso cuales son sus drawables
 		drawablesList=newGame.getDrawables();
 		//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
 		//recorro el arreglo de drawables y los voy dibujando
+
+		//Se borra las imagenes anteriores
+		this.panel.paint(g);
 		for (Drawable toDraw : drawablesList){
 			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
 			window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
