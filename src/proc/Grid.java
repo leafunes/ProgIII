@@ -49,7 +49,7 @@ public class Grid {
 		
 		while(counter < howMany ){
 			if(grid[randI][randJ] == null){
-				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue, Sprites.cellSprite);
+				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue, Sprites.cell);
 				counter++;
 			}
 			else{

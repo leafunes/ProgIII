@@ -1,6 +1,7 @@
 package proc;
 
 import engine.GameObject;
+import engine.Key;
 import engine.Sprite;
 
 public class Cell extends GameObject {
@@ -47,6 +48,18 @@ public class Cell extends GameObject {
 	}
 	@Override
 	public void collisionEvent(GameObject other) {
+		
+	}
+
+	@Override
+	public void eventKeyPress(Key k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eventClick() {
+		// TODO Auto-generated method stub
 		
 	}
 

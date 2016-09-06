@@ -7,17 +7,12 @@ import engine.Sprite;
 //En esta clase se guardan todos los sprites 
 //para que todos los objetos puedan hacer uso de ellos
 
-final class CellSprite extends Sprite{
-	
-	private final static String spritesPath = "."+File.separator+"sprites"+File.separator;
 
-	public CellSprite() {
-		super(spritesPath + "cell" ,1);
-	}
-	
-}
+
 public class Sprites {
+	private final static String spritesPath = "."+File.separator+"sprites"+File.separator;
 	
-	static CellSprite cellSprite = new CellSprite();
+	public static Sprite cell = new Sprite(spritesPath + "cell" ,1);;
+	public static Sprite startButton = new Sprite(spritesPath + "startButton" ,1);
 
 }

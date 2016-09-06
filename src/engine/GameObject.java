@@ -1,15 +1,21 @@
 package engine;
 
+import java.awt.Rectangle;
+
 public abstract class GameObject {
 	
 	protected int posX;
 	protected int posY;
 
 	public boolean destroyMe;
+	public boolean changeRoom;
+	public int roomNumber;
 	
 	private int xDest;
 	private int yDest;
 	private int velocity;
+	
+	public Rectangle collisionShape;
 	
 	private boolean isMoving;
 	
@@ -27,6 +33,8 @@ public abstract class GameObject {
 		
 		this.width = width;
 		this.height = height;
+		
+		this.collisionShape = new Rectangle(x, y, width, height);
 		
 		this.drawable = new Drawable(this.posX, this.posY, spr);
 	}
@@ -120,6 +128,11 @@ public abstract class GameObject {
 		
 	}
 	
+	public void changeRoom(int pos){
+		this.changeRoom = true;
+		this.roomNumber = pos;
+	}
+	
 	public boolean isMoving(){
 		return this.isMoving;
 	}
@@ -127,6 +140,10 @@ public abstract class GameObject {
 	public abstract void behavior();
 
 	public abstract void collisionEvent(GameObject other);
+	
+	public abstract void eventKeyPress(Key k);
+	
+	public abstract void eventClick();
 	
 
 }

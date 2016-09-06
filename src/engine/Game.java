@@ -1,27 +1,28 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public abstract class Game {
 	
-	private ArrayList<GameRoom> rooms;
+	private TreeMap<Integer,GameRoom> rooms;
 	public boolean isGameOver;
 	private GameRoom currentRoom;
 	
 	public Game(GameRoom mainRoom){
 		this.currentRoom = mainRoom;
-		this.rooms = new ArrayList<>();
-		this.rooms.add(mainRoom);
+		this.rooms = new TreeMap();
+		this.rooms.put(0,mainRoom);
 		
 	}
 	
 	public Game(){
-		this.rooms = new ArrayList<>();
+		this.rooms = new TreeMap<>();
 		
 	}
 	
 	public void addRoom(GameRoom room, int pos){
-		this.rooms.add(pos, room);
+		this.rooms.put(pos, room);
 	}
 	
 	public void changeRoom(int pos){
@@ -39,6 +40,9 @@ public abstract class Game {
 	
 	public void step(){
 		this.isGameOver = this.currentRoom.isGameOver();
+		
+		if(this.currentRoom.changeRoom)changeRoom(currentRoom.roomNumber);
+		
 		this.behavior();
 		this.currentRoom.step();
 		

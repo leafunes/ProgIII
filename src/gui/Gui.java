@@ -59,14 +59,9 @@ public class Gui{
 	 */
 	private void initialize(){
 		frmUngs = new JFrame();
+		frmUngs.setResizable(false);
 		frmUngs.setTitle("2048 UNGS");
-		frmUngs.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent click) {
-				newGame.eventClick(click.getX(),click.getY());
-				
-			}
-		});
+		
 		frmUngs.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -87,17 +82,23 @@ public class Gui{
 		frmUngs.getContentPane().setLayout(null);
 		
 		panel = new NewJPanel();
-		panel.setBounds(0, 0, 584, 411);
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent click) {
+				newGame.eventClick(click.getX(),click.getY());
+			}
+		});
+		panel.setBounds(0, 0, 594, 421);
 		frmUngs.getContentPane().add(panel);
 		
-		  new javax.swing.Timer(50, new ActionListener() {
+		  new javax.swing.Timer(30, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        newGame.step(); //actualizo el juego
 			     }
 			  }).start();
 		
-		  new javax.swing.Timer(100, new ActionListener() {
+		  new javax.swing.Timer(75, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {

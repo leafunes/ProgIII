@@ -9,8 +9,10 @@ public class Game2048 extends Game {
 		
 		super();
 		GameRoom mainRoom = new MainRoom(64, 4, 150, 150);
+		GameRoom menu = new MenuRoom();
 		super.addRoom(mainRoom,0);
-		super.changeRoom(0);
+		super.addRoom(menu,1);
+		super.changeRoom(1);
 		// TODO Auto-generated constructor stub
 	}
 
