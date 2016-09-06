@@ -10,7 +10,7 @@ public class MainRoom extends GameRoom {
 	private Grid grid;
 	
 	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset, Random gen) {
-		super(800, 600);
+		super(600, 450);
 		
 		this.grid = new Grid(4,xOffset,yOffset,64);
 		
