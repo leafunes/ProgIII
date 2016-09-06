@@ -31,8 +31,8 @@ public class Grid {
 		this.toDestroy = new HashSet<>();
 		this.grid = new Cell[dimension][dimension];
 		this.DIMENSION = dimension;
-		this.X_OFFSET = xOffset;
-		this.Y_OFFSET = yOffset;
+		this.X_OFFSET = 10;
+		this.Y_OFFSET = 10;
 		this.CELL_DIMENSION = cellDimension;
 		
 		this.addCells(4);
@@ -49,7 +49,7 @@ public class Grid {
 		
 		while(counter < howMany ){
 			if(grid[randI][randJ] == null){
-				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue, Sprites.cell);
+				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
 				counter++;
 			}
 			else{

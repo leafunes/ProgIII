@@ -36,6 +36,13 @@ public class Drawable {
 		this.string = str;
 	}
 	
+	public void actualizeSprite(Sprite spr){
+		this.sprite = spr;
+		this.spriteIndex = 0;
+		this.actualFrame = sprite.getFrame(0);
+		
+	}
+	
 	protected void nextFrame(){
 		
 		if(this.spriteIndex == this.sprite.length())

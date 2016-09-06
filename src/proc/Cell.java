@@ -2,7 +2,6 @@ package proc;
 
 import engine.GameObject;
 import engine.Key;
-import engine.Sprite;
 
 public class Cell extends GameObject {
 	
@@ -10,8 +9,8 @@ public class Cell extends GameObject {
 	private boolean destroyAndMove;
 	private boolean moveAndValue;
 
-	public Cell(int x ,int y, int value, Sprite spr) {
-		super(x, y, 64, 64,spr);
+	public Cell(int x ,int y, int value) {
+		super(x, y, 64, 64, Sprites.cells.get(value));
 		
 		this.value = value;
 		
@@ -19,6 +18,9 @@ public class Cell extends GameObject {
 
 	@Override
 	public void behavior() {
+		
+		this.drawable.actualizeSprite(Sprites.cells.get(this.value));
+		
 		this.drawable.actualizeText(super.posX+(width/2)-8, super.posY+height/2, String.valueOf(this.value));
 		
 		if(destroyAndMove && !isMoving()) this.destroyMe = true;
