@@ -37,7 +37,7 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void eventKeyPress(Key k) {
-		if(grid.somethingIsMoving()){
+		if(!grid.somethingIsMoving()){
 			
 			switch(k){
 				case K_RIGHT:

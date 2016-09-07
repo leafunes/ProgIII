@@ -35,7 +35,7 @@ public class Grid {
 		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
-		this.addCells(4);
+		this.addCells(2);
 		
 	}
 	
@@ -250,16 +250,16 @@ public class Grid {
 
 	public boolean somethingIsMoving() {
 		
-		for(Cell cell : this.toDestroy)if(cell.isMoving()) return false;
+		for(Cell cell : this.toDestroy)if(cell.isMoving()) return true;
 		
 		for (int i = 0; i < DIMENSION; i++)
 		for(int j = 0; j < DIMENSION ; j++)if(grid[i][j] != null){
 			
-			if(grid[i][j].isMoving())return false;
+			if(grid[i][j].isMoving())return true;
 			
 		}
 		
-		return true;
+		return false;
 	}
 
 
