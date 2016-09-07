@@ -3,7 +3,7 @@ package engine;
 import java.awt.image.BufferedImage;
 
 
-public class Drawable {
+public class Drawable implements Comparable<Drawable>{
 	
 	public int x;
 	public int y;
@@ -15,11 +15,13 @@ public class Drawable {
 	public int yStr;
 	
 	private Sprite sprite;
-	private int spriteIndex; 
+	private int spriteIndex;
+	public int zIndex; 
 
-	public Drawable(int x, int y, Sprite sprite){
+	public Drawable(int x, int y, int zIndex, Sprite sprite){
 		this.x = x;
 		this.y = y;
+		this.zIndex = zIndex;
 		this.sprite = sprite;
 		this.spriteIndex = 0;
 		if(sprite != null)this.actualFrame = sprite.getFrame(0);
@@ -28,6 +30,10 @@ public class Drawable {
 	public void actualizePosition(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void actualizeZIndex(int z){
+		this.zIndex = z;
 	}
 	
 	public void actualizeText(int x, int y, String str){
@@ -63,5 +69,11 @@ public class Drawable {
 	public boolean hasText() {
 		return this.string != "";
 	}
+
+	@Override
+	public int compareTo(Drawable other) {
+		return  this.zIndex - other.zIndex;
+	}
+	
 
 }

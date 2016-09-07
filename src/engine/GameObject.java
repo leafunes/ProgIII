@@ -24,7 +24,7 @@ public abstract class GameObject {
 	
 	protected Drawable drawable;
 	
-	public GameObject(int x, int y, int width, int height, Sprite spr){
+	public GameObject(int x, int y, int zIndex, int width, int height, Sprite spr){
 		this.posX = x;
 		this.posY = y;
 		
@@ -36,7 +36,11 @@ public abstract class GameObject {
 		
 		this.collisionShape = new Rectangle(x, y, width, height);
 		
-		this.drawable = new Drawable(this.posX, this.posY, spr);
+		this.drawable = new Drawable(this.posX, this.posY, zIndex,spr);
+	}
+	
+	public GameObject(int x, int y, int width, int height, Sprite spr){
+		this(x, y, 1, width, height, spr);
 	}
 	
 	public void translate(int x, int y, boolean absolute){

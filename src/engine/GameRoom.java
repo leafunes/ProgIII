@@ -2,6 +2,12 @@ package engine;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.SortedSet;
+
+import proc.Sprites;
 
 public abstract class GameRoom {
 	
@@ -10,7 +16,7 @@ public abstract class GameRoom {
 	
 	protected ArrayList<GameObject> objects;
 	protected ArrayList<Drawable> drawables;
-	protected Drawable background;
+	protected Drawable background = new Drawable(0,0,-1,Sprites.defBackground);
 	private int width;
 	private int height;
 	
@@ -29,18 +35,26 @@ public abstract class GameRoom {
 	
 	public void step(){
 		this.drawables.clear();
+		
+		this.drawables.add(background);
+		
 		for (GameObject obj:this.objects){
 			obj.step();
 			
 			if(obj.changeRoom){
 				this.changeRoom = true;
 				this.roomNumber = obj.roomNumber;
+				
+				obj.changeRoom = false;
 			}
 			
 			this.drawables.add(obj.getDrawable());
 		}
+		
 		this.checkCollision();
 		this.behavior();
+		
+		Collections.sort(this.drawables);
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
