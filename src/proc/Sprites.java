@@ -31,6 +31,12 @@ public class Sprites {
 
 	public static Sprite startButton = new Sprite(spritesPath + "startButton" ,1);
 	
+	public static Sprite scoresButton = new Sprite(spritesPath + "scoreButton" ,1);
+	
+	public static Sprite menuButton = new Sprite(spritesPath + "menuButton" ,1);
+	
 	public static Sprite mainBackground = new Sprite(spritesPath + "background" ,1);
+	
+	public static Sprite defBackground = new Sprite(spritesPath + "defaultBackground" ,1);
 
 }

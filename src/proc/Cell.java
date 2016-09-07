@@ -31,6 +31,7 @@ public class Cell extends GameObject {
 	
 	public void moveAndDestroy(int x, int y, int vel){
 		this.move(x, y, vel);
+		this.drawable.actualizeZIndex(0);
 		this.destroyAndMove = true;
 	}
 	

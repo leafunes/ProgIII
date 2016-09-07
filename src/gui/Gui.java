@@ -94,10 +94,6 @@ public class Gui{
 		panel.setFont(new Font("Open Sans", Font.BOLD, 18));
 		frmUngs.getContentPane().add(panel);
 		
-		panelBackground = new NewJPanel();
-		panelBackground.setBounds(0, 0, 598, 421);
-		frmUngs.getContentPane().add(panelBackground);
-		
 		  new javax.swing.Timer(30, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 			    	 newGame.step(); //actualizo el juego
@@ -123,7 +119,6 @@ public class Gui{
 
 		Graphics g = window.panel.getGraphics();
 
-		
 		//creo un arreglo donde voy a guardar todos los drawables a dibujar
 		ArrayList<Drawable> drawablesList= new ArrayList<>();
 		
@@ -132,25 +127,11 @@ public class Gui{
 		//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
 		//recorro el arreglo de drawables y los voy dibujando
 
-		
-		if(newGame.backgroundHasChanged()){
-			Drawable background = newGame.getBackground();
-			Graphics gBack = window.panelBackground.getGraphics();
-			
-			window.panelBackground.paint(gBack);
-			
-			if(background != null){
-				
-				window.panelBackground.paintImage(g, background.actualFrame, 0, 0);
-				
-			}
-		}
-		
 		for (Drawable toDraw : drawablesList){
+			
 			if(toDraw.hasImage())window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
 			if(toDraw.hasText())window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
 		}
-		
 
 	}
 }

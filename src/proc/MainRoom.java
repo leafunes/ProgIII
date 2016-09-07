@@ -1,6 +1,7 @@
 package proc;
 
 import engine.Drawable;
+import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 
@@ -10,12 +11,37 @@ public class MainRoom extends GameRoom {
 	private Drawable score;
 	private int scorePoints;
 	
+	private class MenuButton extends GameObject{
+
+
+		public MenuButton(int x, int y, int width, int height) {
+			super(x, y, 2 ,width, height,Sprites.menuButton);
+		}
+
+		@Override
+		public void behavior() {}
+
+		@Override
+		public void collisionEvent(GameObject other){}
+
+		@Override
+		public void eventKeyPress(Key k) {}
+
+		@Override
+		public void eventClick() {
+			changeRoom(1);
+		}
+		
+	}
+	
 	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset) {
 		super(600, 450);
-		background = new Drawable(0, 0, Sprites.mainBackground);
+		background = new Drawable(0, 0,-1, Sprites.mainBackground);
+		
+		addObject(new MenuButton(50, 20, 150, 70));
 		
 		this.grid = new Grid(gridDimesion,xOffset,yOffset,64);
-		this.score = new Drawable(0, 0, null);
+		this.score = new Drawable(0, 0, 0,null);
 		
 		//Crea los objetos iniciales
 		
@@ -30,7 +56,6 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void behavior() {
-		this.drawables.add(background);
 		grid.step();
 		
 		scorePoints = grid.getScore();
@@ -72,7 +97,13 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void eventClick(int x, int y) {
-		// TODO Auto-generated method stub
+		for(GameObject obj: objects){
+			
+			if(obj.collisionShape.contains(x, y)){
+				obj.eventClick();
+			}
+			
+		}
 		
 	}
 

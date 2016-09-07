@@ -8,7 +8,6 @@ public abstract class Game {
 	private TreeMap<Integer,GameRoom> rooms;
 	public boolean isGameOver;
 	private GameRoom currentRoom;
-	private boolean backgroundChanged = false;
 	
 	public Game(GameRoom mainRoom){
 		this.currentRoom = mainRoom;
@@ -32,7 +31,6 @@ public abstract class Game {
 			throw new ArrayIndexOutOfBoundsException("No existe el cuarto");
 		
 		this.currentRoom = this.rooms.get(pos);
-		this.backgroundChanged = true;
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
@@ -43,23 +41,15 @@ public abstract class Game {
 	public void step(){
 		this.isGameOver = this.currentRoom.isGameOver();
 		
-		if(this.currentRoom.changeRoom)changeRoom(currentRoom.roomNumber);
+		if(this.currentRoom.changeRoom){
+			this.currentRoom.changeRoom = false;
+			
+			changeRoom(currentRoom.roomNumber);
+		}
 		
 		this.behavior();
 		this.currentRoom.step();
 		
-	}
-	
-	public Drawable getBackground() {
-		return this.currentRoom.background;
-	}
-	
-	public boolean backgroundHasChanged(){
-		if(this.backgroundChanged){
-			this.backgroundChanged = false;
-			return true;
-		}
-		return false;
 	}
 	
 	public void eventKeyPress(Key k){
