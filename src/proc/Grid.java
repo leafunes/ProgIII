@@ -41,23 +41,19 @@ public class Grid {
 	}
 	
 	private void addCells(int howMany){
-		
-		int randI = gen.nextInt(DIMENSION);
-		int randJ = gen.nextInt(DIMENSION);
-		int cellValue = (gen.nextInt(2)*2)+2;
-		
+
 		int counter = 0;
 		
-		while(counter < howMany ){
+		do{
+			int randI = gen.nextInt(DIMENSION);
+			int randJ = gen.nextInt(DIMENSION);
+			int cellValue = (gen.nextInt(2)*2)+2;
 			if(grid[randI][randJ] == null){
 				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
 				counter++;
 			}
-			else{
-				randI = gen.nextInt(DIMENSION);
-				randJ = gen.nextInt(DIMENSION);
-			}
-		}
+			
+		}while(counter < howMany );
 		
 		
 	}
