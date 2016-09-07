@@ -1,7 +1,5 @@
 package proc;
 
-import java.util.Random;
-
 import engine.Drawable;
 import engine.GameRoom;
 import engine.Key;

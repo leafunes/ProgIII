@@ -1,7 +1,5 @@
 package proc;
 
-import java.awt.Rectangle;
-
 import engine.GameObject;
 import engine.Key;
 import engine.Sprite;

@@ -1,6 +1,5 @@
 package proc;
 
-import java.awt.image.BufferedImage;
 
 import engine.Game;
 import engine.GameRoom;

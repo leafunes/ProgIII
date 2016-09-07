@@ -18,7 +18,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
-import java.awt.Panel;
 
 public class Gui{
 
