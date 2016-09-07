@@ -106,7 +106,7 @@ public class Gui{
 			     }
 			  }).start();
 		
-		  new javax.swing.Timer(50, new ActionListener() {
+		  new javax.swing.Timer(75, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
@@ -146,10 +146,6 @@ public class Gui{
 				
 			}
 		}
-		
-		
-		//Se borra las imagenes anteriores
-		this.panel.paint(g);
 		
 		for (Drawable toDraw : drawablesList){
 			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);

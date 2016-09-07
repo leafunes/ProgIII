@@ -19,8 +19,6 @@ public class Cell extends GameObject {
 	@Override
 	public void behavior() {
 		
-		this.drawable.actualizeSprite(Sprites.cells.get(this.value));
-		
 		this.drawable.actualizeText(super.posX+(width/2)-8, super.posY+height/2, String.valueOf(this.value));
 		
 		if(destroyAndMove && !isMoving()) this.destroyMe = true;
@@ -42,6 +40,7 @@ public class Cell extends GameObject {
 
 	public void setValue() {
 		this.value = this.value*2;
+		this.drawable.actualizeSprite(Sprites.cells.get(this.value));
 	}
 	
 	public void moveAndsetValue() {
