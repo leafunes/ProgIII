@@ -147,8 +147,8 @@ public class Gui{
 		}
 		
 		for (Drawable toDraw : drawablesList){
-			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
-			window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
+			if(toDraw.hasImage())window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
+			if(toDraw.hasText())window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
 		}
 		
 

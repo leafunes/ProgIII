@@ -22,7 +22,7 @@ public class Drawable {
 		this.y = y;
 		this.sprite = sprite;
 		this.spriteIndex = 0;
-		this.actualFrame = sprite.getFrame(0);
+		if(sprite != null)this.actualFrame = sprite.getFrame(0);
 	}
 	
 	public void actualizePosition(int x, int y){
@@ -54,6 +54,14 @@ public class Drawable {
 	
 	protected void setSprite(Sprite sprite) {
 		this.sprite = sprite;
+	}
+
+	public boolean hasImage() {
+		return this.sprite != null;
+	}
+
+	public boolean hasText() {
+		return this.string != "";
 	}
 
 }

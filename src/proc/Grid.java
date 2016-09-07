@@ -21,6 +21,7 @@ public class Grid {
 	private final int CELL_DIMENSION;
 	private final int CELL_VEL = 15;
 	ArrayList<Drawable> drawables = new ArrayList<>();
+	private int score;
 	
 	private enum direction{RIGTH, LEFT, UP, DOWN};
 	
@@ -43,7 +44,7 @@ public class Grid {
 		
 		int randI = gen.nextInt(DIMENSION);
 		int randJ = gen.nextInt(DIMENSION);
-		int cellValue = (gen.nextInt(1)*2)+2;
+		int cellValue = (gen.nextInt(2)*2)+2;
 		
 		int counter = 0;
 		
@@ -158,6 +159,8 @@ public class Grid {
 			if(grid[i][j] != null && grid[newI][newJ] != null){
 				if(grid[newI][newJ].getValue() == grid[i][j].getValue()){
 					
+					score += grid[i][j].getValue()*2;
+					
 					Cell cell = grid[newI][newJ];
 					cell.moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
 					
@@ -260,6 +263,10 @@ public class Grid {
 		}
 		
 		return false;
+	}
+
+	public int getScore() {
+		return this.score;
 	}
 
 
