@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import engine.Drawable;
+import objects.Cell;
 
 public class Grid {
 	
@@ -28,35 +29,99 @@ public class Grid {
 	
 	public Grid(int dimension, int xOffset, int yOffset, int cellDimension){
 		
+
+		this.grid = new Cell[dimension][dimension];
+		
 		this.gen = new Random();
 		this.toDestroy = new HashSet<>();
-		this.grid = new Cell[dimension][dimension];
+		
 		this.DIMENSION = dimension;
 		this.X_OFFSET = xOffset;
 		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
+		//Se agregan las celdas iniciales
 		this.addCells(2);
 		
 	}
 	
-	private void addCells(int howMany){
-
-		int counter = 0;
+	public void step(){
 		
-		do{
-			int randI = gen.nextInt(DIMENSION);
-			int randJ = gen.nextInt(DIMENSION);
-			int cellValue = (gen.nextInt(2)*2)+2;
-			if(grid[randI][randJ] == null){
-				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
-				counter++;
-			}
-			
-		}while(counter < howMany );
+		drawables.clear();
+		
+		actualizeDrawables();
+		
+		if(this.somethingActualized && !somethingIsMoving()){
+			addCells(1);
+			this.somethingActualized = false;
+		}
 		
 		
 	}
+	
+	public void moveRigth(){
+		
+		for (int i = 0; i < DIMENSION; i++){
+			moveCell(i, 0, direction.RIGTH);
+			combineCell(i, DIMENSION - 1, direction.RIGTH);
+			moveCell(i, 0, direction.RIGTH);
+		}
+			
+	}
+	
+	public void moveLeft(){
+		
+		for (int i = 0; i < DIMENSION; i++){
+			moveCell(i, DIMENSION -1 , direction.LEFT);
+			combineCell(i, 0, direction.LEFT);
+			moveCell(i, DIMENSION -1 , direction.LEFT);
+		}
+			
+	}
+	
+	public void moveUp(){
+		
+		for (int j = 0; j < DIMENSION; j++){
+			moveCell(DIMENSION - 1, j, direction.UP);
+			combineCell(0, j, direction.UP);
+			moveCell(DIMENSION - 1, j, direction.UP);
+		}
+			
+	}
+	
+	public void moveDown(){
+		
+		for (int j = 0; j < DIMENSION; j++){
+			moveCell(0, j, direction.DOWN);
+			combineCell(DIMENSION - 1, j, direction.DOWN);
+			moveCell(0, j, direction.DOWN);
+		}
+			
+	}
+	
+	private void actualizeDrawables(){
+		
+		//Actualizo los drawables de la matriz
+		for (int i = 0; i < DIMENSION; i++)
+			for(int j = 0; j < DIMENSION ; j++)if(grid[i][j] != null){	
+					grid[i][j].step();
+					drawables.add(grid[i][j].getDrawable());
+			}
+			
+		//Actualizo los drawables de los objetos que se van a destruir
+			for (Iterator<Cell> i = toDestroy.iterator(); i.hasNext();) {
+			    Cell cell = i.next();
+				cell.step();
+				
+				if(cell.destroyMe){
+					i.remove();//Elimino la Cell de la lista
+				}
+				
+				else drawables.add(cell.getDrawable());
+			}
+		
+	}
+	
 	
 	private boolean moveCell(int i, int j, direction dir){
 		int newI = 0;
@@ -68,23 +133,19 @@ public class Grid {
 		switch(dir){
 		//Itero por columna
 		case RIGTH:
-			//Para adelante
 			newI = i;
 			newJ = j + 1;
 			break;
 		case LEFT:
-			//apara atras
 			newI = i;
 			newJ = j - 1;
 			break;
 		//Itero por fila
 		case DOWN:
-			//Para abajo
 			newI = i + 1;
 			newJ = j;
 			break;
 		case UP:
-			//para arriba
 			newI = i - 1;
 			newJ = j ;
 			break;
@@ -128,124 +189,70 @@ public class Grid {
 		switch(dir){
 		//Itero por columna
 		case RIGTH:
-			//Para adelante
 			newI = i;
 			newJ = j - 1;
 			break;
 		case LEFT:
-			//apara atras
 			newI = i;
 			newJ = j + 1;
 			break;
 		//Itero por fila
 		case DOWN:
-			//Para abajo
 			newI = i - 1;
 			newJ = j;
 			break;
 		case UP:
-			//para arriba
 			newI = i + 1;
 			newJ = j ;
 			break;
 		}
 		
-		//Out of bounds
+		
 		if(!(newJ >= DIMENSION  || newJ < 0 || newI >= DIMENSION || newI < 0)){
-			if(grid[i][j] != null && grid[newI][newJ] != null){
-				if(grid[newI][newJ].getValue() == grid[i][j].getValue()){
+			if(grid[i][j] != null && grid[newI][newJ] != null && grid[newI][newJ].getValue() == grid[i][j].getValue()){
+				//Si la celda sobre la que estoy coincide en valor con la celda vecina
 					
-					score += grid[i][j].getValue()*2;
-					
-					Cell cell = grid[newI][newJ];
-					cell.moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
-					
-					this.toDestroy.add(cell);
-					grid[newI][newJ] = null;
-					
-					grid[i][j].setValue();
-					this.somethingActualized = true;
-				}
+				score += grid[i][j].getValue()*2;
+				
+				//Muevo la celda graficamente, cuando se termine de mover esta sera destruida
+				Cell cell = grid[newI][newJ];
+				cell.moveAndDestroy(j*CELL_DIMENSION + X_OFFSET, i*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
+				this.toDestroy.add(cell);
+				
+				//Destruyo la celda de la matriz
+				grid[newI][newJ] = null;
+				
+				//Actualizo los valores de la celda actual
+				grid[i][j].setValue();
+				
+				this.somethingActualized = true;
+				
 			}
 			
-			combineCell(newI, newJ, dir);
+			combineCell(newI, newJ, dir);//Se combina la celda vecina
 			
 		}
 		
 	}
 	
-	public void moveRigth(){
-		
-		for (int i = 0; i < DIMENSION; i++){
-			moveCell(i, 0, direction.RIGTH);
-			combineCell(i, DIMENSION - 1, direction.RIGTH);
-			moveCell(i, 0, direction.RIGTH);
-		}
-			
-	}
-	
-	public void moveUp(){
-		
-		for (int j = 0; j < DIMENSION; j++){
-			moveCell(DIMENSION - 1, j, direction.UP);
-			combineCell(0, j, direction.UP);
-			moveCell(DIMENSION - 1, j, direction.UP);
-		}
-			
-	}
-	
-	
-	public void moveLeft(){
-		
-		for (int i = 0; i < DIMENSION; i++){
-			moveCell(i, DIMENSION -1 , direction.LEFT);
-			combineCell(i, 0, direction.LEFT);
-			moveCell(i, DIMENSION -1 , direction.LEFT);
-		}
-			
-	}
-	
-	public void moveDown(){
-		
-		for (int j = 0; j < DIMENSION; j++){
-			moveCell(0, j, direction.DOWN);
-			combineCell(DIMENSION - 1, j, direction.DOWN);
-			moveCell(0, j, direction.DOWN);
-		}
-			
-	}
-	
-	public void step(){
-		
-		drawables.clear();
-		
-		for (int i = 0; i < DIMENSION; i++)
-		for(int j = 0; j < DIMENSION ; j++)if(grid[i][j] != null){	
-				grid[i][j].step();
-				drawables.add(grid[i][j].getDrawable());
-		}
-		
-		for (Iterator<Cell> i = toDestroy.iterator(); i.hasNext();) {
-		    Cell cell = i.next();
-			cell.step();
-			if(cell.destroyMe){
-				i.remove();
-			}
-			else drawables.add(cell.getDrawable());
-		}
-		
-		if(this.somethingActualized && !somethingIsMoving()){
-			addCells(1);
-			this.somethingActualized = false;
-		}
-		
-		
-	}
-	
-	public ArrayList<Drawable> getDrawables(){
-		return drawables;
-	}
+	private void addCells(int howMany){
 
+		int counter = 0;
+		
+		do{
+			int randI = gen.nextInt(DIMENSION);
+			int randJ = gen.nextInt(DIMENSION);
+			int cellValue = (gen.nextInt(2)*2)+2;
+			
+			if(grid[randI][randJ] == null){
+				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
+				counter++;
+			}
+			
+		}while(counter < howMany );
+		
+		
+	}
 
 	public boolean somethingIsMoving() {
 		
@@ -261,10 +268,12 @@ public class Grid {
 		return false;
 	}
 
+	public ArrayList<Drawable> getDrawables(){
+		return drawables;
+	}
+
 	public int getScore() {
 		return this.score;
 	}
-
-
 
 }

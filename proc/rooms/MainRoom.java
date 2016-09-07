@@ -1,9 +1,11 @@
-package proc;
+package rooms;
 
 import engine.Drawable;
 import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
+import proc.Grid;
+import proc.Sprites;
 
 public class MainRoom extends GameRoom {
 	

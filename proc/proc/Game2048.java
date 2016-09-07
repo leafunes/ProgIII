@@ -3,6 +3,8 @@ package proc;
 
 import engine.Game;
 import engine.GameRoom;
+import rooms.MainRoom;
+import rooms.MenuRoom;
 
 public class Game2048 extends Game {
 

@@ -1,7 +1,8 @@
-package proc;
+package objects;
 
 import engine.GameObject;
 import engine.Key;
+import proc.Sprites;
 
 public class Cell extends GameObject {
 	

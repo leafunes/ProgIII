@@ -1,8 +1,8 @@
-package proc;
+package rooms;
 
 import engine.GameObject;
 import engine.Key;
-import engine.Sprite;
+import proc.Sprites;
 
 public class MenuRoom extends engine.GameRoom {
 	
