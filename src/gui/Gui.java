@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import java.awt.Panel;
 
 public class Gui{
 
@@ -26,6 +27,7 @@ public class Gui{
 	private static Gui window;
 	
 	NewJPanel panel;
+	NewJPanel panelBackground;
 
 	/**
 	 * Launch the application.
@@ -89,18 +91,22 @@ public class Gui{
 				newGame.eventClick(click.getX(),click.getY());
 			}
 		});
-		panel.setBounds(0, 0, 594, 421);
+		panel.setBounds(0, 0, 598, 421);
 		panel.setFont(new Font("Open Sans", Font.BOLD, 18));
 		frmUngs.getContentPane().add(panel);
 		
+		panelBackground = new NewJPanel();
+		panelBackground.setBounds(0, 0, 598, 421);
+		frmUngs.getContentPane().add(panelBackground);
+		
 		  new javax.swing.Timer(30, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
-
-			        newGame.step(); //actualizo el juego
+			    	 newGame.step(); //actualizo el juego
+			        
 			     }
 			  }).start();
 		
-		  new javax.swing.Timer(100, new ActionListener() {
+		  new javax.swing.Timer(50, new ActionListener() {
 			     public void actionPerformed(ActionEvent e) {
 
 			        try {
@@ -127,17 +133,28 @@ public class Gui{
 		//toDraw no es un indice sino algo de tipo drawable, que tiene un frame, un x e y
 		//recorro el arreglo de drawables y los voy dibujando
 
+		
+		if(newGame.backgroundHasChanged()){
+			Drawable background = newGame.getBackground();
+			Graphics gBack = window.panelBackground.getGraphics();
+			
+			window.panelBackground.paint(gBack);
+			
+			if(background != null){
+				
+				window.panelBackground.paintImage(g, background.actualFrame, 0, 0);
+				
+			}
+		}
+		
+		
 		//Se borra las imagenes anteriores
 		this.panel.paint(g);
-		
-		//if(newGame.backgroundHasChanged())window.panel.paintImage(g, newGame.getBackground().actualFrame, 0, 0);
-		
 		
 		for (Drawable toDraw : drawablesList){
 			window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
 			window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
 		}
-		
 		
 
 	}
