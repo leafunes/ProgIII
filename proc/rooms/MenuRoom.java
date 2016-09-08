@@ -6,6 +6,31 @@ import proc.Sprites;
 
 public class MenuRoom extends engine.GameRoom {
 	
+	private class RigthButton extends GameObject{
+
+		public RigthButton(int x, int y, int width, int height) {
+			super(x, y, width, height, Sprites.rigth);
+		}
+
+		@Override
+		public void behavior() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void collisionEvent(GameObject other){}
+
+		@Override
+		public void eventKeyPress(Key k) {}
+
+		@Override
+		public void eventClick() {
+			System.out.println("derecha");
+		}
+		
+	}
+	
 	private class StartButton extends GameObject{
 
 		public StartButton(int x, int y, int width, int height) {
@@ -61,6 +86,8 @@ public class MenuRoom extends engine.GameRoom {
 		
 		addObject( new StartButton(250, 150, 150, 70));
 		addObject( new ScoreButton(250, 250, 150, 70));
+		addObject( new RigthButton(100, 100, 32, 32));
+		
 		
 	}
 
