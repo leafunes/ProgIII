@@ -152,13 +152,13 @@ public class Grid {
 		}
 		
 		//Out of bounds
-		if(newJ >= DIMENSION  || newJ < 0 || newI >= DIMENSION || newI < 0)return false;
+		if(outOfBounds(newI, newJ))return false;
 		
 		//Si soy nulo muevo la celda siguiente
-		if(grid[i][j] == null)return moveCell(newI, newJ, dir);
+		if(isEmpty(i, j))return moveCell(newI, newJ, dir);
 		
 		//Si la siguiente es nula, o la siguiente se puede mover, me muevo
-		if(grid[newI][newJ] == null || moveCell(newI, newJ, dir)){
+		if(isEmpty(newI, newJ) || moveCell(newI, newJ, dir)){
 			
 			//Se mueve la celda graficamente
 			grid[i][j].move(newJ*CELL_DIMENSION + X_OFFSET, newI*CELL_DIMENSION + Y_OFFSET, CELL_VEL);
@@ -208,7 +208,7 @@ public class Grid {
 		}
 		
 		
-		if(!(newJ >= DIMENSION  || newJ < 0 || newI >= DIMENSION || newI < 0)){
+		if(!outOfBounds(newI, newJ)){
 			if(grid[i][j] != null && grid[newI][newJ] != null && grid[newI][newJ].getValue() == grid[i][j].getValue()){
 				//Si la celda sobre la que estoy coincide en valor con la celda vecina
 					
@@ -244,7 +244,7 @@ public class Grid {
 			int randJ = gen.nextInt(DIMENSION);
 			int cellValue = (gen.nextInt(2)*2)+2;
 			
-			if(grid[randI][randJ] == null){
+			if(isEmpty(randI, randJ)){
 				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
 				counter++;
 			}
@@ -266,6 +266,14 @@ public class Grid {
 		}
 		
 		return false;
+	}
+	
+	private boolean outOfBounds(int i, int j) {
+		return j >= DIMENSION  || j < 0 || i >= DIMENSION || i < 0;
+	}
+
+	private boolean isEmpty(int i, int j) {
+		return grid[i][j] == null;
 	}
 
 	public ArrayList<Drawable> getDrawables(){
