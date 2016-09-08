@@ -4,6 +4,7 @@ import engine.Drawable;
 import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
+import objects.Buttons;
 import proc.Grid;
 import proc.Sprites;
 
@@ -13,34 +14,12 @@ public class MainRoom extends GameRoom {
 	private Drawable score;
 	private int scorePoints;
 	
-	private class MenuButton extends GameObject{
 
-
-		public MenuButton(int x, int y, int width, int height) {
-			super(x, y, 2 ,width, height,Sprites.menuButton);
-		}
-
-		@Override
-		public void behavior() {}
-
-		@Override
-		public void collisionEvent(GameObject other){}
-
-		@Override
-		public void eventKeyPress(Key k) {}
-
-		@Override
-		public void eventClick() {
-			changeRoom(1);
-		}
-		
-	}
-	
 	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset) {
 		super(600, 450);
 		background = new Drawable(0, 0,-1, Sprites.mainBackgrounds.get(gridDimesion));
 		
-		addObject(new MenuButton(50, 20, 150, 70));
+		addObject(new Buttons.MenuButton(480, 380));
 		
 		this.grid = new Grid(gridDimesion,xOffset,yOffset,64);
 		this.score = new Drawable(0, 0, 0,null);

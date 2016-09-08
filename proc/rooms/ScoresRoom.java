@@ -2,24 +2,19 @@ package rooms;
 
 import engine.Drawable;
 import engine.GameObject;
+import engine.GameRoom;
 import engine.Key;
+import objects.Buttons;
 import proc.Sprites;
 
-import objects.Buttons;
+public class ScoresRoom extends GameRoom{
 
-public class MenuRoom extends engine.GameRoom {
-	
-	public MenuRoom() {
+	public ScoresRoom() {
 		super(600, 450);
 		
-		this.background = new Drawable(0, 0, -1, Sprites.menuBackground);
+		this.background = new Drawable(0, 0, -1, Sprites.scoresBackground);
 		
-		addObject( new Buttons.StartButton(225, 250));
-		addObject( new Buttons.ScoreButton(225, 350));
-		addObject( new Buttons.RigthButton(375, 190));
-		addObject( new Buttons.LeftButton(200, 190));
-		
-		
+		addObject(new Buttons.MenuButton(480, 380));
 	}
 
 	@Override
@@ -42,6 +37,7 @@ public class MenuRoom extends engine.GameRoom {
 
 	@Override
 	public void eventClick(int x, int y) {
+		
 		for(GameObject obj: objects){
 			
 			if(obj.collisionShape.contains(x, y)){
