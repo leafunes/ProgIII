@@ -49,7 +49,13 @@ public class ScoresRoom extends GameRoom{
 	}
 
 	@Override
-	public void init() {
+	public void exitRoomEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void enterRoomEvent() {
 		// TODO Auto-generated method stub
 		
 	}

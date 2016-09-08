@@ -100,7 +100,9 @@ public abstract class GameRoom {
 	public abstract boolean isGameOver();
 	
 	public abstract void eventClick(int x, int y);
-	
-	public abstract void init();
+
+	public abstract void exitRoomEvent();
+
+	public abstract void enterRoomEvent();
 
 }

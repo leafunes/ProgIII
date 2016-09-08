@@ -21,16 +21,20 @@ public abstract class Game {
 		
 	}
 	
-	public void addRoom(GameRoom room, int pos){
+	public void addRoom(int pos, GameRoom room){
 		this.rooms.put(pos, room);
 	}
 	
 	public void changeRoom(int pos){
 		
-		if(pos >= this.rooms.size())
-			throw new ArrayIndexOutOfBoundsException("No existe el cuarto");
+		if(!this.rooms.containsKey(pos))
+			throw new ArrayIndexOutOfBoundsException("No existe el cuarto: " + pos);
+		
+		if(this.currentRoom != null)this.currentRoom.exitRoomEvent();
 		
 		this.currentRoom = this.rooms.get(pos);
+		
+		this.currentRoom.enterRoomEvent();
 	}
 	
 	public ArrayList<Drawable> getDrawables(){

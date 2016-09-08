@@ -14,24 +14,24 @@ public class MainRoom extends GameRoom {
 	private Drawable score;
 	private int scorePoints;
 	
-
-	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset) {
-		super(600, 450);
-		background = new Drawable(0, 0,-1, Sprites.mainBackgrounds.get(gridDimesion));
-		
-		addObject(new Buttons.MenuButton(480, 380));
-		
-		this.grid = new Grid(gridDimesion,xOffset,yOffset,64);
-		this.score = new Drawable(0, 0, 0,null);
-		
-		//Crea los objetos iniciales
-		
-		this.init();
-	}
-
+	private int gridDimension;
+	private int xOffset;
+	private int yOffset;
+	private int cellDimension;
 	
-	@Override
-	public void init(){
+
+	public MainRoom(int cellDimenson, int gridDimension, int xOffset, int yOffset) {
+		super(600, 450);
+		
+		this.cellDimension = cellDimenson;
+		
+		this.gridDimension = gridDimension;
+		
+		this.xOffset = xOffset;
+		
+		this.yOffset = yOffset;
+		
+		background = new Drawable(0, 0,-1, Sprites.mainBackgrounds.get(gridDimension));
 		
 	}
 
@@ -92,6 +92,27 @@ public class MainRoom extends GameRoom {
 	public boolean isGameOver() {
 		return false;
 		//TODO
+	}
+
+
+	@Override
+	public void exitRoomEvent() {
+		this.grid = null;;
+		this.score = null;
+		
+		this.objects.clear();
+		
+	}
+
+
+	@Override
+	public void enterRoomEvent() {
+		
+		addObject(new Buttons.MenuButton(480, 380));
+		
+		this.grid = new Grid(gridDimension,xOffset,yOffset,cellDimension);
+		this.score = new Drawable(0, 0, 0,null);
+		
 	}
 
 }
