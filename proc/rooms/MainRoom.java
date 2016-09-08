@@ -38,7 +38,7 @@ public class MainRoom extends GameRoom {
 	
 	public MainRoom(int cellDimension, int gridDimesion, int xOffset, int yOffset) {
 		super(600, 450);
-		background = new Drawable(0, 0,-1, Sprites.mainBackground);
+		background = new Drawable(0, 0,-1, Sprites.mainBackgrounds.get(gridDimesion));
 		
 		addObject(new MenuButton(50, 20, 150, 70));
 		

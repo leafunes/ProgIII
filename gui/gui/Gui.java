@@ -79,7 +79,7 @@ public class Gui{
 			}
 			
 		});
-		frmUngs.setBounds(100, 100, 600, 450);
+		frmUngs.setBounds(100, 100, 605, 477);
 		frmUngs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmUngs.getContentPane().setLayout(null);
 		
@@ -90,7 +90,7 @@ public class Gui{
 				newGame.eventClick(click.getX(),click.getY());
 			}
 		});
-		panel.setBounds(0, 0, 598, 421);
+		panel.setBounds(0, 0, 600, 450);
 		panel.setFont(new Font("Open Sans", Font.BOLD, 18));
 		frmUngs.getContentPane().add(panel);
 		

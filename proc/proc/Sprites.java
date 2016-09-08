@@ -29,15 +29,27 @@ public class Sprites {
 		cells.put(2048, new Sprite(spritesPath + "2048Cell" ,1));
 	}
 	
-	public static Sprite rigth = new Sprite(spritesPath + "rigth" ,1);
-
+	public static TreeMap<Integer, Sprite> mainBackgrounds = new TreeMap<>();
+	
+	static{
+		mainBackgrounds.put(3, new Sprite(spritesPath + "background3" ,1));
+		mainBackgrounds.put(4, new Sprite(spritesPath + "background4" ,1));
+		mainBackgrounds.put(5, new Sprite(spritesPath + "background5" ,1));
+		}
+	
+	public static Sprite scoresBackground = new Sprite(spritesPath + "scoresBackground" ,1);
+	
+	public static Sprite menuBackground = new Sprite(spritesPath + "menuBackground" ,1);
+	
+	public static Sprite rigth = new Sprite(spritesPath + "rigth", 1);
+	
+	public static Sprite left = new Sprite(spritesPath + "left", 1);
+	
 	public static Sprite startButton = new Sprite(spritesPath + "startButton" ,1);
 	
 	public static Sprite scoresButton = new Sprite(spritesPath + "scoreButton" ,1);
 	
 	public static Sprite menuButton = new Sprite(spritesPath + "menuButton" ,1);
-	
-	public static Sprite mainBackground = new Sprite(spritesPath + "background" ,1);
 	
 	public static Sprite defBackground = new Sprite(spritesPath + "defaultBackground" ,1);
 
