@@ -6,6 +6,8 @@ import proc.Sprites;
 
 public class Cell extends GameObject {
 	
+
+	private int spriteIndex;
 	private int value;
 	private boolean destroyAndMove;
 	private boolean moveAndValue;
@@ -42,7 +44,11 @@ public class Cell extends GameObject {
 
 	public void setValue() {
 		this.value = this.value*2;
-		this.drawable.actualizeSprite(Sprites.cells.get(this.value));
+		spriteIndex = value;
+		
+		if(spriteIndex > 2048)spriteIndex = 2;
+		
+		this.drawable.actualizeSprite(Sprites.cells.get(this.spriteIndex));
 	}
 	
 	public void moveAndsetValue() {
