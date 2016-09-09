@@ -50,12 +50,14 @@ public class Drawable implements Comparable<Drawable>{
 	}
 	
 	protected void nextFrame(){
+		if(this.sprite != null){
+			
+			if(this.spriteIndex == this.sprite.length())
+				this.spriteIndex = 0;
 		
-		if(this.spriteIndex == this.sprite.length())
-			this.spriteIndex = 0;
+			this.actualFrame = this.sprite.getFrame(this.spriteIndex);
 		
-		this.actualFrame = this.sprite.getFrame(this.spriteIndex);
-		
+		}
 	}
 	
 	protected void setSprite(Sprite sprite) {
