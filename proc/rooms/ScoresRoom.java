@@ -1,10 +1,14 @@
 package rooms;
 
+import java.util.ArrayList;
+
+import data.Scores;
 import engine.Drawable;
 import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 import objects.Buttons;
+import objects.TextObject;
 import proc.Sprites;
 
 public class ScoresRoom extends GameRoom{
@@ -57,7 +61,14 @@ public class ScoresRoom extends GameRoom{
 
 	@Override
 	public void enterRoomEvent() {
-		// TODO Auto-generated method stub
+		ArrayList<Integer> scores = Scores.getScores();
+		
+		for (int i = 1; i <= scores.size(); i++) {
+			
+			addObject(new TextObject(330, 73 + (i*33), scores.get(i - 1).toString()));
+			addObject(new TextObject(200, 73 + (i*33), i+"."));
+			
+		}
 		
 	}
 
