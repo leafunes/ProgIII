@@ -133,5 +133,28 @@ public class Buttons {
 		
 	}
 	
+	public static class GameOverButton extends GameObject{
+
+
+		public GameOverButton(int x, int y) {
+			super(x, y, 2 ,500, 250, Sprites.gameOver);
+		}
+
+		@Override
+		public void behavior() {}
+
+		@Override
+		public void collisionEvent(GameObject other){}
+
+		@Override
+		public void eventKeyPress(Key k) {}
+
+		@Override
+		public void eventClick() {
+			changeRoom(1);
+		}
+		
+	}
+	
 	
 }

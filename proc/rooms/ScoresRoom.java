@@ -72,4 +72,10 @@ public class ScoresRoom extends GameRoom{
 		
 	}
 
+	@Override
+	public void gameOverEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -64,4 +64,10 @@ public class MenuRoom extends engine.GameRoom {
 		
 	}
 
+	@Override
+	public void gameOverEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

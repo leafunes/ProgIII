@@ -55,6 +55,9 @@ public abstract class GameRoom {
 		this.behavior();
 		
 		Collections.sort(this.drawables);
+		
+		if(isGameOver()) gameOverEvent();
+		
 	}
 	
 	public ArrayList<Drawable> getDrawables(){
@@ -101,6 +104,8 @@ public abstract class GameRoom {
 	
 	public abstract void eventClick(int x, int y);
 
+	public abstract void gameOverEvent();
+	
 	public abstract void exitRoomEvent();
 
 	public abstract void enterRoomEvent();

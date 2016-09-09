@@ -5,6 +5,7 @@ import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 import objects.Buttons;
+import objects.Buttons.GameOverButton;
 import proc.Grid;
 import proc.Sprites;
 
@@ -45,6 +46,7 @@ public class MainRoom extends GameRoom {
 		
 		this.drawables.addAll(grid.getDrawables());
 		this.drawables.add(score);
+		
 	}
 		
 
@@ -111,6 +113,12 @@ public class MainRoom extends GameRoom {
 		
 		this.grid = new Grid(gridDimension,xOffset,yOffset,cellDimension);
 		this.score = new Drawable(0, 0, 0,null);
+		
+	}
+
+	@Override
+	public void gameOverEvent() {
+		addObject(new Buttons.GameOverButton(20, 20));
 		
 	}
 

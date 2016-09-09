@@ -40,6 +40,11 @@ public class Sprites {
 	public static Sprite scoresBackground = new Sprite(spritesPath + "scoresBackground" ,1);
 	
 	public static Sprite menuBackground = new Sprite(spritesPath + "menuBackground" ,1);
+
+	public static Sprite defBackground = new Sprite(spritesPath + "defaultBackground" ,1);
+	
+	
+	public static Sprite gameOver = new Sprite(spritesPath + "gameOver", 1);
 	
 	public static Sprite rigth = new Sprite(spritesPath + "rigth", 1);
 	
@@ -51,6 +56,5 @@ public class Sprites {
 	
 	public static Sprite menuButton = new Sprite(spritesPath + "menuButton" ,1);
 	
-	public static Sprite defBackground = new Sprite(spritesPath + "defaultBackground" ,1);
 
 }
