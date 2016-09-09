@@ -90,8 +90,7 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public boolean isGameOver() {
-		return false;
-		//TODO
+		return grid.isGameOver();
 	}
 
 
