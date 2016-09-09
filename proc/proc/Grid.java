@@ -23,6 +23,7 @@ public class Grid {
 	private final int CELL_VEL = 15;
 	ArrayList<Drawable> drawables = new ArrayList<>();
 	private int score;
+	private int freePlaces;
 	
 	private enum direction{RIGTH, LEFT, UP, DOWN};
 	
@@ -35,13 +36,15 @@ public class Grid {
 		this.gen = new Random();
 		this.toDestroy = new HashSet<>();
 		
+		this.freePlaces = dimension*dimension;
+		
 		this.DIMENSION = dimension;
 		this.X_OFFSET = xOffset;
 		this.Y_OFFSET = yOffset;
 		this.CELL_DIMENSION = cellDimension;
 		
 		//Se agregan las celdas iniciales
-		this.addCells(2);
+		this.addCells(freePlaces);
 		
 	}
 	
@@ -213,6 +216,7 @@ public class Grid {
 				//Si la celda sobre la que estoy coincide en valor con la celda vecina
 					
 				score += grid[i][j].getValue()*2;
+				freePlaces++;
 				
 				//Muevo la celda graficamente, cuando se termine de mover esta sera destruida
 				Cell cell = grid[newI][newJ];
@@ -247,6 +251,7 @@ public class Grid {
 			if(isEmpty(randI, randJ)){
 				grid[randI][randJ] = new Cell(randJ*CELL_DIMENSION + X_OFFSET, randI * CELL_DIMENSION + Y_OFFSET, cellValue);
 				counter++;
+				freePlaces --;
 			}
 			
 		}while(counter < howMany );
@@ -268,6 +273,29 @@ public class Grid {
 		return false;
 	}
 	
+	public boolean isGameOver(){
+		
+		if(freePlaces > 0) return false;
+		
+		for (int i = 0; i < DIMENSION; i++)
+		for (int j = 0; j < DIMENSION; j++){
+			if(checkCombine(i,j))return false;
+		}
+		
+		return true;
+		
+	}
+	
+	private boolean checkCombine(int i, int j) {
+		if(i >= DIMENSION - 1 && j >= DIMENSION - 1) return false;
+		
+		if(i >= DIMENSION - 1)return grid[i][j].getValue() == grid[i][j + 1].getValue();
+		
+		if(j >= DIMENSION - 1)return grid[i][j].getValue() == grid[i + 1][j].getValue();
+		
+		return grid[i][j].getValue() == grid[i][j + 1].getValue() || grid[i][j].getValue() == grid[i+1][j].getValue();
+	}
+
 	private boolean outOfBounds(int i, int j) {
 		return j >= DIMENSION  || j < 0 || i >= DIMENSION || i < 0;
 	}
