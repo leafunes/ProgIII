@@ -118,7 +118,7 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void gameOverEvent() {
-		addObject(new Buttons.GameOverButton(20, 20));
+		addObject(new Buttons.GameOverButton(70, 70));
 		
 		Scores.putScore(scorePoints);
 		
