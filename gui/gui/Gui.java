@@ -17,7 +17,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Font;
 
 public class Gui{
 
@@ -91,7 +90,6 @@ public class Gui{
 			}
 		});
 		panel.setBounds(0, 0, 600, 450);
-		//panel.setFont(new Font("Open Sans", Font.BOLD, 18));
 		frmUngs.getContentPane().add(panel);
 		
 		  new javax.swing.Timer(30, new ActionListener() {

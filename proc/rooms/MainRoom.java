@@ -1,5 +1,6 @@
 package rooms;
 
+import data.GlobalVariables;
 import data.Scores;
 import engine.Drawable;
 import engine.GameObject;
@@ -113,6 +114,7 @@ public class MainRoom extends GameRoom {
 		
 		this.grid = new Grid(gridDimension,xOffset,yOffset,cellDimension);
 		this.score = new Drawable(0, 0, 0,null);
+		this.score.actualizeFont(GlobalVariables.largeFont);
 		
 	}
 
