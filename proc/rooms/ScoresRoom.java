@@ -21,20 +21,13 @@ public class ScoresRoom extends GameRoom{
 	}
 
 	@Override
-	public void behavior() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void behavior() {}
 
 	@Override
-	public void eventKeyPress(Key k) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void eventKeyPress(Key k) {}
 
 	@Override
 	public boolean isGameOver() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -75,9 +68,6 @@ public class ScoresRoom extends GameRoom{
 	}
 
 	@Override
-	public void gameOverEvent() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void gameOverEvent() {}
 
 }

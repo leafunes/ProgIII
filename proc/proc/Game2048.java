@@ -31,9 +31,6 @@ public class Game2048 extends Game {
 	}
 
 	@Override
-	public void behavior() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void behavior() {}
 
 }

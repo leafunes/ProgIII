@@ -40,14 +40,10 @@ public class MenuRoom extends engine.GameRoom {
 	}
 
 	@Override
-	public void eventKeyPress(Key k) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void eventKeyPress(Key k) {}
 
 	@Override
 	public boolean isGameOver() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -64,10 +60,7 @@ public class MenuRoom extends engine.GameRoom {
 	}
 
 	@Override
-	public void exitRoomEvent() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void exitRoomEvent() {}
 
 	@Override
 	public void enterRoomEvent() {
@@ -76,10 +69,7 @@ public class MenuRoom extends engine.GameRoom {
 	}
 
 	@Override
-	public void gameOverEvent() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void gameOverEvent() {}
 
 
 }

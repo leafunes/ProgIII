@@ -65,21 +65,13 @@ public class Cell extends GameObject {
 		
 	}
 	@Override
-	public void collisionEvent(GameObject other) {
-		
-	}
+	public void collisionEvent(GameObject other) {}
 
 	@Override
-	public void eventKeyPress(Key k) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void eventKeyPress(Key k) {}
 
 	@Override
-	public void eventClick() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void eventClick() {}
 
 
 

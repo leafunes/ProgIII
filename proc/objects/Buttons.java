@@ -15,10 +15,7 @@ public class Buttons {
 		}
 
 		@Override
-		public void behavior() {
-			// TODO Auto-generated method stub
-			
-		}
+		public void behavior() {}
 
 		@Override
 		public void collisionEvent(GameObject other){}
@@ -48,10 +45,7 @@ public class Buttons {
 		}
 
 		@Override
-		public void behavior() {
-			// TODO Auto-generated method stub
-			
-		}
+		public void behavior() {}
 
 		@Override
 		public void collisionEvent(GameObject other){}
@@ -79,10 +73,7 @@ public class Buttons {
 		}
 
 		@Override
-		public void behavior() {
-			// TODO Auto-generated method stub
-			
-		}
+		public void behavior() {}
 
 		@Override
 		public void collisionEvent(GameObject other){}
@@ -105,10 +96,7 @@ public class Buttons {
 		}
 
 		@Override
-		public void behavior() {
-			// TODO Auto-generated method stub
-			
-		}
+		public void behavior() {}
 
 		@Override
 		public void collisionEvent(GameObject other){}
