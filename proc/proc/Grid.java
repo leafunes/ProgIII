@@ -21,6 +21,10 @@ public class Grid {
 	private final int Y_OFFSET;
 	private final int CELL_DIMENSION;
 	private final int CELL_VEL = 15;
+	
+	private final int INIT_CELLS = 2;
+	private final int CELLS_PER_ACT = 1;
+	
 	ArrayList<Drawable> drawables = new ArrayList<>();
 	private int score;
 	private int freePlaces;
@@ -44,7 +48,7 @@ public class Grid {
 		this.CELL_DIMENSION = cellDimension;
 		
 		//Se agregan las celdas iniciales
-		this.addCells(freePlaces);
+		this.addCells(INIT_CELLS);
 		
 	}
 	
@@ -55,7 +59,7 @@ public class Grid {
 		actualizeDrawables();
 		
 		if(this.somethingActualized && !somethingIsMoving()){
-			addCells(1);
+			addCells(CELLS_PER_ACT);
 			this.somethingActualized = false;
 		}
 		

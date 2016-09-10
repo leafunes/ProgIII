@@ -2,7 +2,7 @@ package rooms;
 
 import engine.Drawable;
 import engine.GameObject;
-import engine.GlobalVariables;
+import data.GlobalVariables;
 import engine.Key;
 import proc.Sprites;
 
@@ -13,7 +13,7 @@ public class MenuRoom extends engine.GameRoom {
 
 	
 	Integer dimension = new Integer(4);
-	private GameObject dimText = new TextObject(50, 50, dimension.toString());
+	private GameObject dimText = new TextObject(50, 50, dimension.toString(), GlobalVariables.largeFont);
 	
 	public MenuRoom() {
 		super(600, 450);

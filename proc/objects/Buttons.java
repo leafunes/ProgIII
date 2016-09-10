@@ -1,7 +1,7 @@
 package objects;
 
+import data.GlobalVariables;
 import engine.GameObject;
-import engine.GlobalVariables;
 import engine.Key;
 import proc.Sprites;
 

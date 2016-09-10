@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -16,8 +17,9 @@ public class NewJPanel extends JPanel{
 		 
 	 }
 	 
-	 public void paintText(Graphics g, String str, int x, int y){
+	 public void paintText(Graphics g, String str, int x, int y, Font font){
 		 
+		 g.setFont(font);
 		 g.drawString(str, x, y);
 		 
 	 }

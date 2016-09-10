@@ -1,6 +1,9 @@
 package engine;
 
+import java.awt.Font;
 import java.awt.image.BufferedImage;
+
+import data.GlobalVariables;
 
 
 public class Drawable implements Comparable<Drawable>{
@@ -13,6 +16,7 @@ public class Drawable implements Comparable<Drawable>{
 	public String string = "";
 	public int xStr;
 	public int yStr;
+	public Font font;
 	
 	private Sprite sprite;
 	private int spriteIndex;
@@ -23,8 +27,19 @@ public class Drawable implements Comparable<Drawable>{
 		this.y = y;
 		this.zIndex = zIndex;
 		this.sprite = sprite;
+		
+		
 		this.spriteIndex = 0;
 		if(sprite != null)this.actualFrame = sprite.getFrame(0);
+	
+		this.font = GlobalVariables.defaultFont;
+	
+	}
+	
+	public void actualizeFont(Font font){
+		
+		this.font = font;
+		
 	}
 	
 	public void actualizePosition(int x, int y){

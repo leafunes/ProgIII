@@ -2,6 +2,7 @@ package rooms;
 
 import java.util.ArrayList;
 
+import data.GlobalVariables;
 import data.Scores;
 import engine.Drawable;
 import engine.GameObject;
@@ -65,8 +66,8 @@ public class ScoresRoom extends GameRoom{
 		
 		for (int i = 1; i <= scores.size(); i++) {
 			
-			addObject(new TextObject(330, 73 + (i*33), scores.get(i - 1).toString()));
-			addObject(new TextObject(200, 73 + (i*33), i+"."));
+			addObject(new TextObject(330, 73 + (i*33), scores.get(i - 1).toString(), GlobalVariables.largeFont));
+			addObject(new TextObject(200, 73 + (i*33), i + ".", GlobalVariables.largeFont));
 			
 		}
 		

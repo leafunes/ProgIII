@@ -91,7 +91,7 @@ public class Gui{
 			}
 		});
 		panel.setBounds(0, 0, 600, 450);
-		panel.setFont(new Font("Open Sans", Font.BOLD, 18));
+		//panel.setFont(new Font("Open Sans", Font.BOLD, 18));
 		frmUngs.getContentPane().add(panel);
 		
 		  new javax.swing.Timer(30, new ActionListener() {
@@ -130,7 +130,7 @@ public class Gui{
 		for (Drawable toDraw : drawablesList){
 			
 			if(toDraw.hasImage())window.panel.paintImage(g, toDraw.actualFrame, toDraw.x, toDraw.y);
-			if(toDraw.hasText())window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr);
+			if(toDraw.hasText())window.panel.paintText(g, toDraw.string, toDraw.xStr, toDraw.yStr, toDraw.font);
 		}
 
 	}
