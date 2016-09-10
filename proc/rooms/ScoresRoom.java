@@ -18,8 +18,6 @@ public class ScoresRoom extends GameRoom{
 		super(600, 450);
 		
 		this.background = new Drawable(0, 0, -1, Sprites.scoresBackground);
-		
-		addObject(new Buttons.MenuButton(480, 380));
 	}
 
 	@Override
@@ -56,12 +54,15 @@ public class ScoresRoom extends GameRoom{
 
 	@Override
 	public void exitRoomEvent() {
-		// TODO Auto-generated method stub
+		this.objects.clear();
 		
 	}
 
 	@Override
 	public void enterRoomEvent() {
+		
+		addObject(new Buttons.MenuButton(480, 380));
+		
 		ArrayList<Integer> scores = Scores.getScores();
 		
 		for (int i = 1; i <= scores.size(); i++) {
