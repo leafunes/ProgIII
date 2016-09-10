@@ -1,11 +1,11 @@
 package rooms;
 
+import data.Scores;
 import engine.Drawable;
 import engine.GameObject;
 import engine.GameRoom;
 import engine.Key;
 import objects.Buttons;
-import objects.Buttons.GameOverButton;
 import proc.Grid;
 import proc.Sprites;
 
@@ -119,6 +119,8 @@ public class MainRoom extends GameRoom {
 	@Override
 	public void gameOverEvent() {
 		addObject(new Buttons.GameOverButton(20, 20));
+		
+		Scores.putScore(scorePoints);
 		
 	}
 

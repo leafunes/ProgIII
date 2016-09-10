@@ -2,12 +2,18 @@ package rooms;
 
 import engine.Drawable;
 import engine.GameObject;
+import engine.GlobalVariables;
 import engine.Key;
 import proc.Sprites;
 
 import objects.Buttons;
+import objects.TextObject;
 
 public class MenuRoom extends engine.GameRoom {
+
+	
+	Integer dimension = new Integer(4);
+	private GameObject dimText = new TextObject(50, 50, dimension.toString());
 	
 	public MenuRoom() {
 		super(600, 450);
@@ -18,13 +24,18 @@ public class MenuRoom extends engine.GameRoom {
 		addObject( new Buttons.ScoreButton(225, 350));
 		addObject( new Buttons.RigthButton(375, 190));
 		addObject( new Buttons.LeftButton(200, 190));
+		addObject(dimText);
+		
 		
 		
 	}
 
 	@Override
 	public void behavior() {
-		// TODO Auto-generated method stub
+		
+		String dim = GlobalVariables.GRID_MENU_DIMENSION.toString();
+		
+		dimText.getDrawable().actualizeText(270, 215, dim + " x "+dim);
 		
 	}
 
@@ -60,7 +71,7 @@ public class MenuRoom extends engine.GameRoom {
 
 	@Override
 	public void enterRoomEvent() {
-		// TODO Auto-generated method stub
+		GlobalVariables.GRID_MENU_DIMENSION = 4;
 		
 	}
 
@@ -69,5 +80,6 @@ public class MenuRoom extends engine.GameRoom {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

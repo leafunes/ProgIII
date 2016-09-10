@@ -1,6 +1,7 @@
 package objects;
 
 import engine.GameObject;
+import engine.GlobalVariables;
 import engine.Key;
 import proc.Sprites;
 
@@ -10,6 +11,7 @@ public class Buttons {
 
 		public LeftButton(int x, int y) {
 			super(x, y, 32, 32, Sprites.left);
+			
 		}
 
 		@Override
@@ -26,7 +28,13 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			System.out.println("left");
+			
+			if(GlobalVariables.GRID_MENU_DIMENSION.equals(3)) 
+				GlobalVariables.GRID_MENU_DIMENSION = 5;
+			else
+				GlobalVariables.GRID_MENU_DIMENSION --;
+			
+			
 		}
 		
 	}
@@ -36,6 +44,7 @@ public class Buttons {
 
 		public RigthButton(int x, int y) {
 			super(x, y, 32, 32, Sprites.rigth);
+			
 		}
 
 		@Override
@@ -52,7 +61,12 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			System.out.println("derecha");
+			
+			if(GlobalVariables.GRID_MENU_DIMENSION.equals(5)) 
+				GlobalVariables.GRID_MENU_DIMENSION = 3;
+			else
+				GlobalVariables.GRID_MENU_DIMENSION ++;
+			
 		}
 		
 	}
@@ -78,7 +92,7 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			changeRoom(2);
+			changeRoom(4);
 		}
 	
 	}
@@ -104,7 +118,12 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			this.changeRoom(0);
+			if(GlobalVariables.GRID_MENU_DIMENSION.equals(3))
+				this.changeRoom(0);
+			else if(GlobalVariables.GRID_MENU_DIMENSION.equals(4))
+				this.changeRoom(1);
+			else if(GlobalVariables.GRID_MENU_DIMENSION.equals(5))
+				this.changeRoom(2);
 		}
 		
 	}
@@ -128,7 +147,7 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			changeRoom(1);
+			changeRoom(3);
 		}
 		
 	}
@@ -151,7 +170,7 @@ public class Buttons {
 
 		@Override
 		public void eventClick() {
-			changeRoom(1);
+			changeRoom(3);
 		}
 		
 	}
