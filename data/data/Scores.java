@@ -30,10 +30,6 @@ public class Scores{
 		Collections.sort(ret);
 		Collections.reverse(ret);
 		
-		for (Integer integer : ret) {
-			System.out.println(integer);
-		}
-		
 		return ret;
 	}
 
