@@ -1,6 +1,7 @@
 package data;
 
 import java.awt.Font;
+import java.io.File;
 
 public class GlobalVariables {
 	
@@ -14,5 +15,8 @@ public class GlobalVariables {
 	public static final Font smallFont = new Font("Open Sans", Font.BOLD, 15);
 	
 	public static final Font smallerFont = new Font("Open Sans", Font.BOLD, 12);
+	
+	
+	public static final String scoresRoute = "." + File.separator + "scores.dat";
 
 }

@@ -99,8 +99,12 @@ public class MainRoom extends GameRoom {
 
 	@Override
 	public void exitRoomEvent() {
+
+		Scores.putScore(scorePoints);
+		
 		this.grid = null;;
 		this.score = null;
+		
 		
 		this.objects.clear();
 		
