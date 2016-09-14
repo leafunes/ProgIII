@@ -21,9 +21,13 @@ public class MainRoom extends GameRoom {
 	private int yOffset;
 	private int cellDimension;
 	
+	private boolean scoresAdded;
+	
 
 	public MainRoom(int cellDimenson, int gridDimension, int xOffset, int yOffset) {
 		super(600, 450);
+		
+		this.scoresAdded = false;
 		
 		this.cellDimension = cellDimenson;
 		
@@ -100,7 +104,7 @@ public class MainRoom extends GameRoom {
 	@Override
 	public void exitRoomEvent() {
 
-		Scores.putScore(scorePoints);
+		addScores();
 		
 		this.grid = null;;
 		this.score = null;
@@ -116,6 +120,8 @@ public class MainRoom extends GameRoom {
 		
 		addObject(new Buttons.MenuButton(480, 380));
 		
+		scoresAdded = false;
+		
 		this.grid = new Grid(gridDimension,xOffset,yOffset,cellDimension);
 		this.score = new Drawable(0, 0, 0,null);
 		this.score.actualizeFont(GlobalVariables.largeFont);
@@ -126,8 +132,15 @@ public class MainRoom extends GameRoom {
 	public void gameOverEvent() {
 		addObject(new Buttons.GameOverButton(70, 70));
 		
-		Scores.putScore(scorePoints);
+		addScores();
 		
+	}
+	
+	private void addScores(){
+		if(!scoresAdded){
+			Scores.putScore(scorePoints);
+			scoresAdded = true;
+		}
 	}
 
 }
